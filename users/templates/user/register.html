@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+{% load static%}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %} 
+
+{% block content %}
+    <div class="content-section">
+        <form action="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-botton mb-4">Creare cont</legend>
+                {{ form | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Inscrie-te</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Aveti deja cont? <a class="" href="">Logheaza-te</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}

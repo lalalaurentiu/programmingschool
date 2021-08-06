@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+{% load static%}
+{% load bootstrap4 %}
+
+{% block title %}HTML, CSS, JavaScript IDE{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+        <iframe src="{% url 'HTMLIDE:project_load' projects.project_title%}" height="800px" width="100%" style="border: 1px solid black;" frameborder="0"></iframe>
+</div>
+{% endif %}
+{% endblock %}

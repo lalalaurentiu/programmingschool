@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="text/javascript">
+        
+{% if user.is_authenticated %}
+        var button =  `
+                        <form method="POST">
+                                <div class="d-none">
+                                        {% csrf_token %}
+                                        {{ form.project_title }}
+                                        {{ form.project_code_html }}
+                                        {{ form.project_code_css }}
+                                        {{ form.project_code_js }}
+                                <\/div>
+                                <button onclick="send()" class="btn btn-primary">Save<\/button>
+                        <\/form> 
+
+
+                        <script>
+                                function send () {
+                                var html_code = $("#html").html();
+                                var css_code = $("#css");
+                                var js_code = $("#js");
+                                var project_code_html = $("#id_project_code_html");
+                                var project_code_css = $("#id_project_code_css")
+                                var project_code_js = $("#id_project_code_js")
+                                
+                                Swal.fire({
+                                        title: 'Introdu numele proiectului',
+                                        input: 'text',
+                                        inputAttributes: {
+                                                autocapitalize: 'off'
+                                        },
+                                        showCancelButton: false,
+                                        confirmButtonText: 'OK',
+                                        allowOutsideClick: false,
+                                        preConfirm: (value) => {
+                                                if (!value) {
+                                                Swal.showValidationMessage(
+                                                        '<i class="fa fa-info-circle"></i> Nume obligatoriu'
+                                                )}
+                                        }
+                                }).then((results) => {
+                                        $('#id_project_title').val(results.value);
+                                        for (var i = 0; i < html_code.length; i++){
+                                        project_code_html.append(html_code[i])
+                                        };
+                                        for(var i = 0; i < css_code.length; i++){
+                                                project_code_css.append($(css_code[i]).text())
+                                        };
+                                        for(var i = 0; i < js_code.length; i++){
+                                                project_code_js.append($(js_code[i]).text())
+                                        };
+   
+                                });
+                                
+                        }
+                
+                        <\/script>
+                `
+{% endif %}
+
+        var htmlH = 
+                `<html>
+                <head>
+                <style type="text/css">
+                .expand { width: 100%; height: 100%; }
+                .close { border: none; margin: 0px; padding: 0px; }
+                html,body { overflow: hidden;}
+                <\/style>
+                <\/head>
+                <body class="expand close" onload="document.f.ta.focus(); document.f.ta.select();">
+                <form class="expand close" name="f">
+                <textarea id="html" class="expand close" style="background: #def; font: 14pt Monospace;" name="ta" wrap="hard" spellcheck="false">
+                <\/textarea>
+                <\/form>
+                <\/body>
+                <\/html`;
+        
+        var htmlC = 
+                `<html class="expand close">
+                <head>
+                <style type="text/css">
+                .expand { width: 100%; height: 100%; }
+                .close { border: none; margin: 0px; padding: 0px; }
+                html,body { overflow: hidden;}
+                <\/style>
+                <\/head>
+                <body class="expand close">
+                <form class="expand close" name="f">
+                <textarea class="expand close" style="background: #fde; font: 14pt Monospace;" name="ta" wrap="hard" spellcheck="false">
+                <\/textarea>
+                <\/form>
+                <\/body>
+                <\/html>`;
+
+        var htmlJ = 
+                `<html class="expand close">
+                <head>
+                <style type="text/css">
+                .expand { width: 100%; height: 100%; }
+                .close { border: none; margin: 0px; padding: 0px; }
+                html,body { overflow: hidden;}
+                <\/style>
+                <\/head>
+                <body class="expand close">
+                <form class="expand close" name="f">
+                <textarea class="expand close" style="background: #ffff00; font: 14pt Monospace;" name="ta" wrap="hard" spellcheck="false">
+                <\/textarea>
+                <\/form>
+                <\/body>
+                <\/html>`;
+        var defaultH = `<!-- Enter your html code here -->`;
+        var defaultC = `/* Enter your css code here */`;
+        var defaultJ = `/* Enter your js code here */`;
+
+        var oldH = '';
+        var oldC = '';
+        var oldJ = '';
+        
+        function init()
+        {
+        window.boxH.document.write(htmlH);
+        window.boxH.document.close();
+        window.boxH.document.f.ta.value = defaultH;
+        window.boxC.document.write(htmlC);
+        window.boxC.document.close();
+        window.boxC.document.f.ta.value = defaultC;
+        window.boxJ.document.write(htmlJ);
+        window.boxJ.document.close();
+        window.boxJ.document.f.ta.value = defaultJ;
+        refresh();
+        };
+        
+        function refresh()
+        {
+        var textH = window.boxH.document.f.ta;
+        var textC = window.boxC.document.f.ta;
+        var textJ = window.boxJ.document.f.ta;
+        var d = window.output.document; 
+        
+        if(oldH != textH.value || oldC != textC.value || oldJ != textJ.value ) 
+        {
+        oldH = textH.value;
+        oldC = textC.value;
+        oldJ = textJ.value;
+        d.open();
+        d.write(`
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"><\/script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"><\/script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"><\/script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"><\/script>
+        <style id="css" type="text/css"> ${oldC} <\/style> <div id="html">${oldH}<\/div> {% if user.is_authenticated %} <div class="position-relative">${button}<\/div>{% endif %} <script id="js" type="text/javascript"> ${oldJ} <\/script>`);
+        d.close();
+        };
+        
+        window.setTimeout(refresh, 150);
+        };
+        
+</script>
+</head>
+
+<frameset  rows="50%,*" onload="init();">
+<frameset  cols="*,*,*">
+        <frame name="boxH">
+        <frame name="boxC">
+        <frame name="boxJ">   
+</frameset>
+        <frame name="output">
+</frameset>
+</html>

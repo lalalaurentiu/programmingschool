@@ -1,0 +1,133 @@
+{% load static%}
+{% load bootstrap4 %}
+{% load bootstrap_icons %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% block head %} {% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+
+</head>
+{% block html%}
+{% endblock %}
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-light navbar-expand-md text-monospace shadow navigation-clean-button">
+        <div class="container"><a id="animate" class="navbar-brand" href="{% url 'home:home' %}" data-period="2000" data-type='[ "Programming School", "BETA 1.0"]'>Programming School</a><span class="wrap"></span></a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link">IDE</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'IDE:python_ide' %}"><i class="fab fa-python"></i> Python IDE</a>
+                            <a class="dropdown-item" href="{% url 'HTMLIDE:html_css_js_ide' %}"> <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i> <i class="fab fa-js-square"></i> HTML,CSS and JavaScript IDE </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">Programming language</a>
+                        <div class="dropdown-menu">
+                                {% for c in categories %}
+                                    <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.title }}</a>
+                                {% endfor %}
+                        </div>
+                    </li>
+                    {% block navbar %}{% endblock %}
+                </ul>
+                <ul class="navbar-nav" >
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown" style="width: 150px;"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link btn-lg ">  Salut {{ user.username }}  </a>
+                        <div class="dropdown-menu">
+                            
+                            <div class="p-3">
+                                <a class="btn btn-outline-secondary btn-sm" href="{% url 'logout' %}">Deconecteaza-te</a> 
+                             </div>
+                             <div class="p-3">
+                                <a class="btn btn-outline-secondary btn-sm" href="{% url 'profile' %}">Proiectele tale</a> 
+                             </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item dropdown" style="width: 150px;"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link btn-lg ">  Conecteaza-te  </a>
+                        <div class="dropdown-menu">
+                            <div class="p-3">
+                                <a class="btn btn-danger btn-sm" href="{% provider_login_url 'google' %}">{% bs_icon "google" %}Conecteaza-te cu Google</a> 
+                            </div>
+                            <div class="p-3" >
+                                <a class="btn btn-primary btn-sm" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook" %}Conecteaza-te cu facebook</a>  
+                            </div>
+                            <div class="p-3" >
+                                <a class="btn btn-light btn-sm" href="{% url 'social:begin' 'github' %}">{% bs_icon "github" %}Conecteaza-te cu github</a>  
+                            </div>
+                        </div>
+                    </li>
+                    {% endif %}  
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-monospace">
+        {% if messages %}
+            {% for message in messages %}
+                <script>
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                        })
+
+                        Toast.fire({
+                        icon: 'success',
+                        title: '{{ message }}'
+                    })
+                </script>
+            {% endfor%}
+        {% endif %}
+        {% block content%}
+    
+        {% endblock%}
+    </div>
+    <footer class="text-monospace shadow-lg footer-basic mt-auto">
+        <div class="social"><a href="https://www.youtube.com/channel/UCE7uokFamrF6u-Zc6yU6biQ/featured"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-facebook"></i></a></div>
+        <p class="copyright">Programming School © 2021</p>
+    </footer>
+    <script src="{% static "js/base.js"%}"></script>
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '357337519262736',
+            xfbml      : true,
+            version    : 'v11.0'
+          });
+          FB.AppEvents.logPageView();
+        };
+      
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
+      
+</body>
+</html>
+

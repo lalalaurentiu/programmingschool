@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+{% load static%}
+{% load bootstrap4 %}
+
+{% block content %}
+{% for lesson in lessons_content %}
+<h1>{{ lesson.title }}</h1>
+{% autoescape off %}{{ lesson.content }}{% endautoescape %} 
+{% if lesson.code_link %}
+<div>
+        <button class="btn btn-primary" onclick="show()">Show code</button>
+</div>
+
+
+<script>
+        function show(){
+                window.open("{% url 'lessons:lessons_code' lesson.code_link %}")
+        }
+</script>
+{% endif %}
+{% endfor %}
+{% endblock %}

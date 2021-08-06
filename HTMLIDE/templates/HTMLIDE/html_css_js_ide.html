@@ -1,0 +1,18 @@
+{% extends 'home/base.html' %}
+{% load static%}
+{% load bootstrap4 %}
+
+{% block title %}HTML, CSS, JavaScript IDE{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+        <iframe src="{% url 'HTMLIDE:html_ide' %}" height="800px" width="100%" style="border: 1px solid black;" frameborder="0"></iframe>
+</div>
+{% else %}
+<div class="container">
+        <iframe src="{% url 'HTMLIDE:html_ide' %}" height="800px" width="100%" style="border: 1px solid black;" frameborder="0"></iframe>
+</div>
+<p><b>Pentru a va salva proiectele va rog sa va autetificati</b></p>
+{% endif %}
+{% endblock %}

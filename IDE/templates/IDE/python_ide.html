@@ -1,0 +1,99 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load bootstrap_icons %}
+
+{% block title %}Python IDE{% endblock %}
+
+{% block head %} 
+<link rel="stylesheet" type="text/css" media="all" href="{% static "python_interpretor/css/codemirror.css"%}">
+<link rel="stylesheet" type="text/css" media="all" href="{% static "python_interpretor/css/solarized.css"%}">
+
+<script src="{% static "python_interpretor/js/skulpt.js" %}" type="text/javascript"></script> 
+<script src="{% static "python_interpretor/js/skulpt-stdlib.js" %}" type="text/javascript"></script> 
+<script src="{% static "python_interpretor/js/codemirrorepl.js" %}" type="text/javascript"></script>
+<script src="{% static "python_interpretor/js/repl.js" %}" type="text/javascript"></script>
+<script src="{% static "python_interpretor/js/python.js" %}" type="text/javascript"></script>
+<script src="{% static "python_interpretor/js/editor.js" %}" type="text/javascript"></script>
+<script src="{% static "python_interpretor/js/plugins.js" %}" type="text/javascript"></script>
+
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container p-3 ">
+<form method="post" >
+<button onclick="send()" class="btn btn-outline-secondary " type="submit">Salvare Proiect</button>     
+{% csrf_token %}
+<span class="d-none">
+        {{ form.project_title}}
+</span>
+{{ form.project_code}}
+</form>
+<div class="p-1">
+<button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button>  
+</div> 
+<script>
+        
+        function send(){
+                
+                if ($('#id_project_title').val() == ""){
+                Swal.fire({
+                title: 'Introdu numele proiectului',
+                input: 'text',
+                inputAttributes: {
+                        autocapitalize: 'off'
+                },
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+                allowOutsideClick: false,
+                preConfirm: (value) => {
+                        if (!value) {
+                        Swal.showValidationMessage(
+                                '<i class="fa fa-info-circle"></i> Nume obligatoriu'
+                        )}
+                }
+                }).then((results) => {
+                $('#id_project_title').val(results.value);
+                var code =  $('.cm-variable');
+                var prepare_code = $('#code');
+                for(var i = 0; i < code.length; i++){
+                        prepare_code.append($(code[i]).text());       
+                }        
+        });
+                     
+        }}
+</script>
+</div>
+
+<div id="mycanvas" class="d-block" style="box-sizing: border-box ;width: 100%;height: 300px ;background-color: black;">
+<pre id="edoutput" style=" color: white;">
+</pre>
+</div>
+<div class="p-1">
+        <a class="btn btn-danger" id="clearoutput">clear</a>        
+</div>
+{% else %}
+<div class="container p-3 ">
+<textarea id="code" cols="85" rows="25">
+#Enter your code here
+</textarea>
+<div class="p-1">
+<button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button> 
+</div>
+
+<div id="mycanvas" class="d-block" style="box-sizing: border-box ;width: 100%;height: 300px ;background-color: black;">
+<pre id="edoutput" style=" color: white;">
+</pre>
+</div>
+<div class="p-1">
+        <a class="btn btn-danger" id="clearoutput">clear</a>
+</div>
+<p><b>Pentru a va salva proiectele va rog sa va autetificati</b></p>
+</div>
+{% endif %}
+<div class="d-none">
+<div height="400" width="400" style="border-style: solid;"></div>
+<textarea id="interactive" cols="85" rows="1"></textarea>
+</div>
+{% endblock %}
