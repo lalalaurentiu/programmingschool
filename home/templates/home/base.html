@@ -62,13 +62,10 @@
                     <li class="nav-item dropdown" style="width: 150px;"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link btn-lg ">  Conecteaza-te  </a>
                         <div class="dropdown-menu">
                             <div class="p-3">
-                                <a class="btn btn-danger btn-sm" href="{% provider_login_url 'google' %}">{% bs_icon "google" %}Conecteaza-te cu Google</a> 
+                                <a class="btn btn-primary" href="{% url 'register' %}">Creare Cont</a> 
                             </div>
                             <div class="p-3" >
-                                <a class="btn btn-primary btn-sm" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook" %}Conecteaza-te cu facebook</a>  
-                            </div>
-                            <div class="p-3" >
-                                <a class="btn btn-light btn-sm" href="{% url 'social:begin' 'github' %}">{% bs_icon "github" %}Conecteaza-te cu github</a>  
+                                <a class="btn btn-primary" href="{% url 'login' %}">Logheaza-te</a>  
                             </div>
                         </div>
                     </li>

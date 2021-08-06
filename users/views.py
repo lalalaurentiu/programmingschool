@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 import users.models as model
 from lessons.models import Category
+
 
 categories = Category.objects.all()
 
@@ -15,7 +16,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Contul dumneavoastra a fost creat')
-            return redirect('home:home')
+            return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'user/register.html', {'form':form})

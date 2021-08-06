@@ -10,16 +10,16 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-botton mb-4">Creare cont</legend>
+                <legend class="border-botton mb-4">Logare</legend>
                 {{ form | crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Inscrie-te</button>
+                <button class="btn btn-outline-info" type="submit">Logheaza-te</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Aveti deja cont? <a class="btn btn-primary" href="{% url 'login' %}">Logheaza-te</a>
+                Nu ai cont? <a class="btn btn-primary" href="{% url 'register' %}">Creare Cont</a>
             </small>
         </div>
     </div>
