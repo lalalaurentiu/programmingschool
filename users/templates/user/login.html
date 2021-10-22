@@ -10,32 +10,32 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-botton mb-4">Logare</legend>
+                <legend class="border-botton mb-4">Login</legend>
                 {{ form | crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Logheaza-te</button>
+                <button class="btn btn-outline-info" type="submit">Login</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Nu ai cont? <a class="btn btn-primary" href="{% url 'register' %}">Creare Cont</a>
+                Don't have an account? <a class="btn btn-primary" href="{% url 'register' %}">Creare Cont</a>
             </small>
         </div>
     </div>
     <div class="container p-3 text-center">
         <p>
-            Sau conecteaza-te cu:
+            Or connect with:
         </p>
         <div class="row justify-content-evenly">
             <div class="col-4">
-                <a class="btn btn-primary btn-sm" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook" %}Conecteaza-te cu facebook</a> 
+                <a class="btn btn-primary btn-sm" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook" %}Connect with facebook</a> 
             </div>
             <div class="col-4">
-                <a class="btn btn-danger btn-sm" href="{% provider_login_url 'google' %}">{% bs_icon "google" %}Conecteaza-te cu Google</a>
+                <a class="btn btn-danger btn-sm" href="{% provider_login_url 'google' %}">{% bs_icon "google" %}Connect with Google</a>
             </div>
             <div class="col-4">
-                <a class="btn btn-light btn-sm" href="{% url 'social:begin' 'github' %}">{% bs_icon "github" %}Conecteaza-te cu github</a>
+                <a class="btn btn-light btn-sm" href="{% url 'social:begin' 'github' %}">{% bs_icon "github" %}Connect with GitHub</a>
             </div>
           </div>
     </div>

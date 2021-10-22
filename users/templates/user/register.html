@@ -10,32 +10,32 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-botton mb-4">Creare cont</legend>
+                <legend class="border-botton mb-4">Create account</legend>
                 {{ form | crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Inscrie-te</button>
+                <button class="btn btn-outline-info" type="submit">Register</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Aveti deja cont? <a class="btn btn-primary" href="{% url 'login' %}">Logheaza-te</a>
+                Do you already have an account? <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
             </small>
         </div>
     </div>
     <div class="container p-3 text-center">
         <p>
-            Sau conecteaza-te cu:
+            Or connect with:
         </p>
         <div class="row justify-content-evenly">
             <div class="col-4">
-                <a class="btn btn-primary btn-sm" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook" %}Conecteaza-te cu facebook</a> 
+                <a class="btn btn-primary btn-sm" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook" %}Connect with facebook</a> 
             </div>
             <div class="col-4">
-                <a class="btn btn-danger btn-sm" href="{% provider_login_url 'google' %}">{% bs_icon "google" %}Conecteaza-te cu Google</a>
+                <a class="btn btn-danger btn-sm" href="{% provider_login_url 'google' %}">{% bs_icon "google" %}Connect with Google</a>
             </div>
             <div class="col-4">
-                <a class="btn btn-light btn-sm" href="{% url 'social:begin' 'github' %}">{% bs_icon "github" %}Conecteaza-te cu github</a>
+                <a class="btn btn-light btn-sm" href="{% url 'social:begin' 'github' %}">{% bs_icon "github" %}Connect with GitHub</a>
             </div>
           </div>
     </div>

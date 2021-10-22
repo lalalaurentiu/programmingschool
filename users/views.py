@@ -2,12 +2,21 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout, login
+from django.contrib.auth import logout
 import users.models as model
 from lessons.models import Category
+from django.contrib.auth.views import LoginView
 
 
 categories = Category.objects.all()
+
+class UserView(LoginView):
+    template_name = 'user/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({'categories':categories})
+        return context
 
 def register(request):
     if request.method == "POST":
@@ -19,7 +28,7 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'user/register.html', {'form':form})
+    return render(request, 'user/register.html', {'form':form,'categories':categories})
 
 def user_logout(request):
     logout(request)

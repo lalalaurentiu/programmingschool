@@ -47,25 +47,25 @@
                 </ul>
                 <ul class="navbar-nav" >
                     {% if user.is_authenticated %}
-                    <li class="nav-item dropdown" style="width: 150px;"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link btn-lg ">  Salut {{ user.username }}  </a>
+                    <li class="nav-item dropdown" style="width: 150px;"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link btn-lg ">  Welcome {{ user.username }}  </a>
                         <div class="dropdown-menu">
                             
                             <div class="p-3">
-                                <a class="btn btn-outline-secondary btn-sm" href="{% url 'logout' %}">Deconecteaza-te</a> 
+                                <a class="btn btn-outline-secondary btn-sm" href="{% url 'logout' %}">Sign Out</a> 
                              </div>
                              <div class="p-3">
-                                <a class="btn btn-outline-secondary btn-sm" href="{% url 'profile' %}">Proiectele tale</a> 
+                                <a class="btn btn-outline-secondary btn-sm" href="{% url 'profile' %}">Your projects</a> 
                              </div>
                         </div>
                     </li>
                     {% else %}
-                    <li class="nav-item dropdown" style="width: 150px;"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link btn-lg ">  Conecteaza-te  </a>
+                    <li class="nav-item dropdown" style="width: 150px;"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link btn-lg ">Login</a>
                         <div class="dropdown-menu">
                             <div class="p-3">
-                                <a class="btn btn-primary" href="{% url 'register' %}">Creare Cont</a> 
+                                <a class="btn btn-primary" href="{% url 'register' %}">Sign Up</a> 
                             </div>
                             <div class="p-3" >
-                                <a class="btn btn-primary" href="{% url 'login' %}">Logheaza-te</a>  
+                                <a class="btn btn-primary" href="{% url 'login' %}">Login</a>  
                             </div>
                         </div>
                     </li>
@@ -102,7 +102,7 @@
         {% endblock%}
     </div>
     <footer class="text-monospace shadow-lg footer-basic mt-auto">
-        <div class="social"><a href="https://www.youtube.com/channel/UCE7uokFamrF6u-Zc6yU6biQ/featured"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-facebook"></i></a></div>
+        <div class="social"><a href="#"><i class="fab fa-discord"></i></a><a href="#"><i class="fab fa-facebook"></i></a></div>
         <p class="copyright">Programming School © 2021</p>
     </footer>
     <script src="{% static "js/base.js"%}"></script>
