@@ -41,7 +41,7 @@
 {% endblock %}
 {% block content %}
 {% for lesson in lessons_content %}
-
+<div>
 {% if lesson.title %}
 <h1>{{lesson.title}}</h1>
 {% endif %}
@@ -49,6 +49,7 @@
 {% autoescape off %}{{ lesson.content }}{% endautoescape %} 
 
 {% if lesson.code_python %}
+<div>
 <template id="{{ lesson.slug }}">
 <swal-html>
 <swal-html>
@@ -84,12 +85,14 @@
         }))
 }
 </script>
+</div>
 {% endif %}
 {% if lesson.video %}
 <div class="container text-center">
 {% video lesson.video '100% x 100%' %}        
 </div>
 {% endif %}
+</div>
 {% endfor %}
 
 {% endblock %}
