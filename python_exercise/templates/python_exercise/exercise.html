@@ -34,7 +34,7 @@
 <textarea id="code" cols="85" rows="25">
 {{ e.exercise }}
 </textarea>
-<div class="p-1">
+<div class="p-1 text-center">
 <button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button>
 <template id="help">
         <swal-html>{{ e.help|safe }}</swal-html> 
@@ -46,18 +46,12 @@
         </script>
 </div>
 {% endfor %}
-<div id="mycanvas" class="d-block" style="box-sizing: border-box ;width: 100%;height: 300px ;background-color: black;">
-<pre id="edoutput" style=" color: white;">
+<div id="mycanvas" class="d-block" style="box-sizing: border-box ;">
+<pre id="edoutput" style=" color: black;">
 </pre>
 </div>
-<div class="p-1">
+<div class="p-1 text-center">
         <a class="btn btn-danger" id="clearoutput">Clear</a>
 </div>
 </div>
-
-<div class="d-none">
-<div height="400" width="400" style="border-style: solid;"></div>
-<textarea id="interactive" cols="85" rows="1"></textarea>
-</div>
-
 {% endblock %}
