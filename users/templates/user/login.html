@@ -6,37 +6,67 @@
 {% load bootstrap_icons %}
 
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-botton mb-4">Login</legend>
-                {{ form | crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
+
+    <div class="container-fluid text-center bg-dark">
+    <div class="row justify-content-sm-center">
+    <div class="col col-sm-5 pt-5 bg-warning text-dark p-3" style="font-family: Montserrat,sans-serif">
+      <h1 class="text-center">Welcome</h1>
+        <h3>to</h3>
+        <h2><strong>Programming</strong></h2>
+        <h3><strong>School</strong></h3>
+        <hr>
+        <h5 class="text-secondary">connect with</h5>
+        <p></p>
+                      <a class="btn btn-primary btn-sm mb-2" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook" %}facebook</a>
+                        <a class="btn btn-danger btn-sm mb-2" href="{% provider_login_url 'google' %}">{% bs_icon "google" %}Google</a>
+                        <a class="btn btn-light btn-sm mb-2" href="{% url 'social:begin' 'github' %}">{% bs_icon "github" %}GitHub</a>
+
+    </div>
+
+        <div class="col col-sm-7 text-start">
+
+
+
+            <div class="row text-dark">
+                <div class="col-sm pt-5 pb-5 text-start text-warning bg-dark">
+                <h2>Login</h2>
+                </div>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Don't have an account? <a class="btn btn-primary" href="{% url 'register' %}">Creare Cont</a>
-            </small>
+
+
+            <div class="row text-warning bg-dark">
+    <div class="col-sm-10 pl-3">
+
+
+       <form method="post" action="{% url 'login' %}">{% csrf_token %}
+                    <div class="form-group pb-0">
+                    <i class="fa fa-user-o text-secondary"></i>
+                    <input type="text" class="form-control form-control-lg" style="width: 220px; background-color: #ddffdd" placeholder="Username"{{ form.username }}
+                    </div>
+                    <div class="form-group">
+                    <i class="fa fa-unlock-alt  text-secondary"></i>
+                    <input type="password" class="form-control form-control-lg" style="width: 220px; background-color: #ddffdd" placeholder="Password"{{ form.password }}
+                    </div>
+                    <input type="submit" value="login" class="btn btn-danger btn-md mt-3">
+                    <h5 class="pt-3" style="color: #ddffdd">Lost password?</h5>
+	</form>
+
+
+    </div>
+    <div class="col col-sm-4 pt-5">
+
+    </div>
+            </div>
+
+
+
         </div>
+
+
+  </div>
     </div>
-    <div class="container p-3 text-center">
-        <p>
-            Or connect with:
-        </p>
-        <div class="row justify-content-evenly">
-            <div class="col-4">
-                <a class="btn btn-primary btn-sm" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook" %}Connect with facebook</a> 
-            </div>
-            <div class="col-4">
-                <a class="btn btn-danger btn-sm" href="{% provider_login_url 'google' %}">{% bs_icon "google" %}Connect with Google</a>
-            </div>
-            <div class="col-4">
-                <a class="btn btn-light btn-sm" href="{% url 'social:begin' 'github' %}">{% bs_icon "github" %}Connect with GitHub</a>
-            </div>
-          </div>
-    </div>
+
+
+
+
 {% endblock %}
