@@ -36,7 +36,7 @@
 {% endblock %}
 
 <body class="d-flex flex-column min-vh-100"
-    style="background-image: linear-gradient(rgba(252,248,248,0.86), rgba(252,248,248,0.86))">
+    style="background-image: linear-gradient(rgba(252,248,248,0.86), rgba(252,248,248,0.86));min-width: 541px;">
     <nav class="navbar navbar-expand-md shadow navigation-clean-button pb-5"
         style="background: #000203; color: #030000">
         <div class="container"><a id="animate" class="navbar-brand text-light" href="{% url 'home:home' %}"
@@ -76,8 +76,7 @@
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown"
-                            class="btn dropdown-toggle nav-link btn-md btn-info mt-3 text-dark"> Welcome {{
-                            user.username }} </a>
+                            class="btn dropdown-toggle nav-link btn-md btn-info mt-3 text-dark"> Welcome {{ user.username }} </a>
                         <div class="dropdown-menu" style="background-color: #ddffdd; font-size: 25px">
 
                             <div>
