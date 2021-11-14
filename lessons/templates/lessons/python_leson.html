@@ -25,7 +25,8 @@
 <style>
         swal-html {
         text-align: left;
-}
+        };
+        
 </style>
 {% endblock %}
 {% block navbar %}
@@ -40,8 +41,36 @@
 {% endif %}
 {% endblock %}
 {% block content %}
+<style>
+        .anchor:link{
+        color: black;
+        background-color: transparent;
+        text-decoration: none;
+    }
+    .anchor:visited{
+        color:rgb(167, 157, 157);
+        background-color: transparent;
+        text-decoration: none;
+    };
+</style>
+</style>
+<div class="row min-vh-100" style="min-width: 541px;">
+        <div class="col-2 mh-100 border" style="width: 150px;">
+                <nav id="navbar-example3" class="navbar navbar-light bg-light align-items-stretch " > 
+                        <nav class="nav nav-pills flex-column">
+             
+                                <b class="nav-link" >{{ category }}</b>
+ 
+                                <nav class="nav nav-pills flex-column">
+                                {% for lesson in lessons %}
+                                <a  class="nav-link ms-3 anchor" href="{{ lesson.get_absolute_url }}" >{{ lesson.title }}</a>
+                                {% endfor %}
+                                </nav>
+                        </nav>
+                </nav>
+        </div>
 {% for lesson in lessons_content %}
-<div>
+<div class="col">
 {% if lesson.title %}
 <h1>{{lesson.title}}</h1>
 {% endif %}
@@ -94,5 +123,5 @@
 {% endif %}
 </div>
 {% endfor %}
-
+</div>
 {% endblock %}

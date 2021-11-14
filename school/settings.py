@@ -14,14 +14,10 @@ from pathlib import Path
 import os, sys
 import mimetypes
 
-
-mimetypes.add_type("text/css", ".css", True)
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.modules['fontawesome_free'] = __import__('fontawesome-free')
 mimetypes.add_type("text/css", ".css", True)
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,6 +28,7 @@ SECRET_KEY = str(os.environ.get('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
 
 ALLOWED_HOSTS = ['*']
 

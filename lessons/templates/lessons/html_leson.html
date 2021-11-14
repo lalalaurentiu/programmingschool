@@ -3,6 +3,34 @@
 {% load bootstrap4 %}
 
 {% block content %}
+<style>
+        .anchor:link{
+        color: black;
+        background-color: transparent;
+        text-decoration: none;
+    }
+    .anchor:visited{
+        color:rgb(167, 157, 157);
+        background-color: transparent;
+        text-decoration: none;
+    };
+</style>
+<div class="row min-vh-100" style="min-width: 541px;">
+        <div class="col-2 mh-100 border" style="width: 150px;">
+                <nav id="navbar-example3" class="navbar navbar-light bg-light align-items-stretch " > 
+                        <nav class="nav nav-pills flex-column">
+             
+                                <b class="nav-link" >{{ category }}</b>
+ 
+                                <nav class="nav nav-pills flex-column">
+                                {% for lesson in lessons %}
+                                <a class="nav-link ms-3 anchor" href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a>
+                                {% endfor %}
+                                </nav>
+                        </nav>
+                </nav>
+        </div>
+<div class="col">
 {% for lesson in lessons_content %}
 <h1>{{ lesson.title }}</h1>
 {% autoescape off %}{{ lesson.content }}{% endautoescape %} 
@@ -19,4 +47,8 @@
 </script>
 {% endif %}
 {% endfor %}
+</div>
+</div>
+
+
 {% endblock %}
