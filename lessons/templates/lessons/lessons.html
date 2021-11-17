@@ -15,11 +15,22 @@
         color:rgb(167, 157, 157);
         background-color: transparent;
         text-decoration: none;
-    };
+    }
+    .card{
+        width: 300px;
+        height: 300px;
+    }
+
+    @media screen and (max-width: 375px) {
+  .card {
+    width: 160px;
+    height: auto;
+  }
+}
 </style>
-<div class="row min-vh-100" style="min-width: 541px;">
-    <div class="col mh-100 border" style="max-width: 200px;">
-        <nav id="navbar-example3" class="navbar navbar-light bg-light align-items-stretch " > 
+<div class="d-flex min-vh-100">
+    <div class="col mh-100 border" style="max-width: 170px;padding: 0; margin: 0;">
+        <nav class="navbar navbar-light bg-light align-items-stretch " > 
                 <nav class="nav nav-pills flex-column">
                     <a class="nav-link anchor" href="{{ category.get_absolute }}">{{ category.title }}</a>
                     <nav class="nav nav-pills flex-column">
@@ -35,7 +46,7 @@
         <div class='row p-3'>
             {% for lesson in lessons %}
             <div class="col p-3">
-                <div class="card" style="width: 300px; height: 300px;">
+                <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">{{ lesson.title }}</h4>
                         {% autoescape off %}{{ lesson.content }}{% endautoescape %} 
