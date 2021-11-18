@@ -76,7 +76,7 @@
                   </div>
                 </div>
               </nav> 
-<div class="cintainer">
+
 {% for lesson in lessons_content %}
 
 {% if lesson.title %}
@@ -125,10 +125,10 @@
 </div>
 {% endif %}
 {% if lesson.video %}
-<div class="container text-center">
+<div class="p-3 text-center">
 {% video lesson.video '100% x 100%' %}        
 </div>
 {% endif %}
 {% endfor %}
-</div>
+
 {% endblock %}

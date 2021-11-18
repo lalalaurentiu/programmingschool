@@ -13,7 +13,14 @@ def lessons(request, lesson_slug = None):
     if lesson_slug:
         category_name = get_object_or_404(categories, slug=lesson_slug)
         lessons = lessons.filter(category=category_name)
-    return render(request, 'lessons/lessons.html', {'lessons':lessons, 'category':category_name, 'categories':categories})
+
+        context = {
+            'lessons':lessons, 
+            'category':category_name, 
+            'categories':categories
+            }
+
+    return render(request, 'lessons/lessons.html', context)
 
 #fuctia pentru content
 def lesson(request, slug = None):
@@ -25,9 +32,28 @@ def lesson(request, slug = None):
         lessons_content = lessons_content.filter(category=lesson_name)
         if str(lesson_name.category) == "Python":
             exercise = Exercise.objects.filter(category = lesson_name)
-            return render(request, 'lessons/python_leson.html', {'lessons_content': lessons_content.order_by("id"), 'lessons_name':lesson_name, 'categories':categories, 'exercise':exercise, 'lessons':lessons.filter(category = lesson_name.category), "category":str(lesson_name.category)})
+
+            context = {
+                'lessons_content': lessons_content.order_by("id"),
+                'lessons_name':lesson_name, 
+                'categories':categories,
+                'exercise':exercise,
+                'lessons':lessons.filter(category = lesson_name.category),
+                "category":str(lesson_name.category)
+                }
+
+            return render(request, 'lessons/python_leson.html', context)
         else:
-            return render(request, 'lessons/html_leson.html', {'lessons_content': lessons_content, 'lessons_name':lesson_name, 'categories':categories, 'lessons':lessons.filter(category = lesson_name.category), "category":str(lesson_name.category)})
+
+            context = {
+                'lessons_content': lessons_content, 
+                'lessons_name':lesson_name, 
+                'categories':categories, 
+                'lessons':lessons.filter(category = lesson_name.category), 
+                "category":str(lesson_name.category)
+                }
+
+            return render(request, 'lessons/html_leson.html', context)
 
 @xframe_options_exempt
 def lesson_code(request, slug = None):
@@ -37,7 +63,14 @@ def lesson_code(request, slug = None):
     if slug:
         lesson_name = get_object_or_404(lessons, slug=slug)
         lessons_content = lessons_content.filter(category=lesson_name)
-    return render(request, 'ide/html_ide.html', {'lessons_content': lessons_content, 'lessons_name':lesson_name, 'categories':categories})
+
+        context = {
+            'lessons_content': lessons_content, 
+            'lessons_name':lesson_name, 
+            'categories':categories
+            }
+
+    return render(request, 'ide/html_ide.html', context)
             
 
     
