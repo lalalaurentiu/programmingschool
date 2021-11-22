@@ -27,7 +27,7 @@ mimetypes.add_type("text/css", ".css", True)
 SECRET_KEY = str(os.environ.get('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'HTMLIDE.apps.HtmlideConfig',
     'python_exercise.apps.PythonExerciseConfig',
+    'sql_ide.apps.SqlIdeConfig',
 
     #external apps
     "bootstrap4",

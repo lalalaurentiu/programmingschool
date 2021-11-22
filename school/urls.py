@@ -13,6 +13,7 @@ urlpatterns = [
     path('IDE/', include('IDE.urls', namespace='IDE')),
     path('HTMLIDE/', include('HTMLIDE.urls', namespace='HTMLIDE')),
     path('exercise/', include('python_exercise.urls', namespace='python_exercise')),
+    path("sql_ide/", include("sql_ide.urls", namespace="sql_ide")), 
 
     #users
     path('register/', user_views.register, name='register'),
