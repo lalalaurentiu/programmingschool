@@ -1,155 +1,196 @@
 {% extends 'home/base.html' %}
-
+{% block head %} <link rel="stylesheet" href="/static/css/home.css"> {% endblock %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<div class="pt-5 wow fadeIn">
+  <div class="m-5">
+    <div class="card text-white">
+      <div class="card-header">
+          <img style="object-fit: cover;
+              height: max(25rem, 50vh);" class="card-img" src="https://images.unsplash.com/photo-1548092372-6fa982d00458?ixid=
+              MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80" alt="...">
 
-<div class="card bg-dark text-white pb-3">
-  <img style="object-fit: cover;
-  height: max(25rem, 40vh); opacity: 0.5" class="card-img" src="https://images.unsplash.com/photo-1548092372-6fa982d00458?ixid=
-  MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80" alt="...">
+              <div class="card-img-overlay">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <h3>Ești gata să-ți începi cariera?</h3>
+                              <ul class="list-unstyled d-flex mb-0 py-4 list-inline">
+                                <li class="list-inline-item"><a class="p-2 m-2 fa-lg fb-ic"><i class="fab fa-facebook-f white-text fa-lg">
+                                    </i></a></li>
+                                <li class="list-inline-item"><a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-github white-text fa-lg"> </i></a></li>
+                                <li class="list-inline-item"><a class="p-2 m-2 fa-lg gplus-ic"><i class="fab fa-youtube white-text fa-lg">
+                                    </i></a></li>
+                              </ul>
+                              
+                              <h1 class="pt-5 pb-1 text-light" style="font-size: 50px; letter-spacing: -2px">
+                                  <strong>Programming<br>
+                                          School</strong>
+                                  </h1>
+                              </div>
+                              <div class="cardContent col-sm-4 text-end pt-2 text-light">
+                                <h5 class="pt-4">LET’S COLLABORATE</h5>
 
-  <div class="card-img-overlay">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-4">
-          <h3 style="color: #ddffdd">Ești gata să-ți începi cariera?</h3>
-
-          <i class="bi bi-github" style="font-size: 2rem; color: #dedcdc;"></i>
-          <i class="bi bi-facebook" style="font-size: 2rem; color: #dedcdc;"></i>
-          <i class="bi bi-youtube" style="font-size: 2rem; color: #dedcdc;"></i>
-          <h1 class="pt-5 pb-1 text-light" style="font-size: 50px; letter-spacing: -2px"><strong>Programming<br>
-              School</strong></h1>
-
-
+                                <h1 style="font-size: 50px"><strong>Ready to</strong></h1>
+                                <h1><strong>learn with us?</strong></h1>
+                                <a class="btn btn-success text-light btn-lg mt-3" style="width: 200px"
+                                  href="{% url 'register'%}?next={{request.path}}">Register</a>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
         </div>
-        <div class="col-sm text-end pt-2">
-
-        </div>
-      </div>
-      <div class="row text-center">
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container-fluid mb-2 pb-5 p-3" style="background-image: linear-gradient(#fafa07, #5df5bb)">
-  <div class="row">
-    <div class="col-sm-5 mb-2 p-5">
-      <h5 class="pt-4 text-secondary">LET’S COLLABORATE</h5>
-
-      <h1 class="text-light" style="font-size: 50px"><strong>Ready to</strong></h1>
-      <h1 class="text-dark"><strong>learn with us?</strong></h1>
-      <a class="btn btn-secondary text-light btn-lg mt-3" style="width: 200px"
-        href="{% url 'register'%}?next={{request.path}}">Register</a>
-    </div>
-    <div class="col-sm-6 bg-dark text-light p-3 mt-3 mb-3" style="border-radius: 18px">
-      <h2 class="pt-3"><strong>Ce vei invata?</strong></h2>
-      <p class="lead pt-3">Învățați Java, Python, C++, HTML într-un mediu de învățare bazat pe practica
-        si proiecte reale, studiați teoria și puneți-o
-        imediat în practică prin construirea de aplicații de lucru.</p>
-      <div class="row pb-3 pt-3">
-        <div class="col">
-          <img src="https://icons.iconarchive.com/icons/cornmanthe3rd/plex/48/Other-html-5-icon.png" alt="...">
-          HTML
-        </div>
-        <div class="col">
-          <img src="https://icons.iconarchive.com/icons/cornmanthe3rd/plex/48/Other-python-icon.png" alt="...">
-          Python
-        </div>
-        <div class="col">
-          <img src="https://icons.iconarchive.com/icons/tatice/cristal-intense/48/Java-icon.png" alt="...">
-          Java
-        </div>
-        <div class="col">
-          <img src="https://icons.iconarchive.com/icons/mart/glaze/48/source-cpp-icon.png" alt="...">
-          C++
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm pt-3 mt-3">
-      <div class="card text-center" style="border-left: 3px solid #ff0026; background-color: rgba(196,220,232,0)">
-        <div class="card-header">
-          Featured
-        </div>
-        <div class="card-body">
-          <h4 class="card-title text-dark"><strong>OBTINETI CUNOSTINTE APROFUNDATE</strong></h4>
-          <h6 class="text-secondary">O CALE CATRE SUCCESUL INVATARII</h6>
-          <p class="card-text" style="font-size: smaller">A învăța să codificați înseamnă mai mult decât memorarea
-            sintaxei.
-            În schimb, vă ajutăm să gândiți ca un programator adevărat.</p>
-          <a href="#" class="btn btn-danger">Go somewhere</a>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
 
 
+    <div class="container">
+        <section class="wow fadeIn" data-wow-delay="0.3s">
+            <div
+                class="m-5">
+                <!-- Section heading -->
+                <h1 class="text-center my-5 h1">Ce vei invata?</h1>
+                <!-- Section description -->
+                <p class="text-center mb-5 w-responsive mx-auto">Învățați HTML, CSS, JS, Python, Bootstrap, SQL într-un mediu de învățare bazat pe practica si proiecte reale, studiați teoria și puneți-o imediat în practică prin construirea de aplicații</p>
 
-<div class="container-fluid pt-1 pb-3 mb-3">
+                <!-- Grid row -->
+                <div
+                    class="row">
 
+                    <!-- Grid column -->
+                    <div
+                        class="col-md-4">
 
+                        <!-- Grid row -->
+                        <div class="row mb-3">
+                            <div class="col-3 align-self-center">
+                                <svg viewBox="-52.5 0 361 361" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+                                    <g>
+                                        <path d="M255.554813,70.7657143 L232.31367,331.125451 L127.843868,360.087912 L23.6617143,331.166242 L0.445186813,70.7657143 L255.554813,70.7657143 L255.554813,70.7657143 Z" fill="#E44D26"></path>
+                                        <path d="M128,337.950242 L212.416703,314.546637 L232.277802,92.0573187 L128,92.0573187 L128,337.950242 L128,337.950242 Z" fill="#F16529"></path>
+                                        <path d="M82.8202198,155.932132 L128,155.932132 L128,123.994725 L47.917011,123.994725 L48.6814945,132.562989 L56.530989,220.572835 L128,220.572835 L128,188.636132 L85.7389011,188.636132 L82.8202198,155.932132 L82.8202198,155.932132 Z" fill="#EBEBEB"></path>
+                                        <path d="M90.0177582,236.54189 L57.957978,236.54189 L62.4323516,286.687648 L127.853011,304.848879 L128,304.808088 L128,271.580132 L127.860044,271.617407 L92.2915165,262.013187 L90.0177582,236.54189 L90.0177582,236.54189 Z" fill="#EBEBEB"></path>
+                                        <path d="M24.1807473,0 L40.4107253,0 L40.4107253,16.0351648 L55.2573187,16.0351648 L55.2573187,0 L71.488,0 L71.488,48.5584176 L55.258022,48.5584176 L55.258022,32.2981978 L40.4114286,32.2981978 L40.4114286,48.5584176 L24.1814505,48.5584176 L24.1814505,0 L24.1807473,0 L24.1807473,0 Z" fill="#000000"></path>
+                                        <path d="M92.8309451,16.1026813 L78.5427692,16.1026813 L78.5427692,0 L123.356835,0 L123.356835,16.1026813 L109.06233,16.1026813 L109.06233,48.5584176 L92.8316484,48.5584176 L92.8316484,16.1026813 L92.8309451,16.1026813 L92.8309451,16.1026813 Z" fill="#000000"></path>
+                                        <path d="M130.469275,0 L147.392703,0 L157.802901,17.061978 L168.202549,0 L185.132308,0 L185.132308,48.5584176 L168.969143,48.5584176 L168.969143,24.4901978 L157.802901,41.7554286 L157.523692,41.7554286 L146.349714,24.4901978 L146.349714,48.5584176 L130.469275,48.5584176 L130.469275,0 L130.469275,0 Z" fill="#000000"></path>
+                                        <path d="M193.20967,0 L209.444571,0 L209.444571,32.5077802 L232.268659,32.5077802 L232.268659,48.5584176 L193.20967,48.5584176 L193.20967,0 L193.20967,0 Z" fill="#000000"></path>
+                                        <path d="M127.889582,220.572835 L167.216527,220.572835 L163.509451,261.992791 L127.889582,271.606857 L127.889582,304.833407 L193.362286,286.687648 L193.842637,281.291956 L201.347516,197.212132 L202.126769,188.636132 L127.889582,188.636132 L127.889582,220.572835 L127.889582,220.572835 Z" fill="#FFFFFF"></path>
+                                        <path d="M127.889582,155.854066 L127.889582,155.932132 L205.032791,155.932132 L205.673495,148.753582 L207.128615,132.562989 L207.892396,123.994725 L127.889582,123.994725 L127.889582,155.854066 L127.889582,155.854066 Z" fill="#FFFFFF"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="col-9">
+                                <h5 class="font-weight-bold">HTML</h5>
+                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                            </div>
+                        </div>
+                        <!-- Grid row -->
 
+                        <!-- Grid row -->
+                        <div class="row mb-2">
+                            <div class="col-3 align-self-center">
+                                <svg viewBox="-52.5 0 361 361" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+                                    <g>
+                                        <path d="M127.843868,360.087912 L23.6617143,331.166242 L0.445186813,70.7657143 L255.554813,70.7657143 L232.31367,331.125451 L127.843868,360.087912 L127.843868,360.087912 Z" fill="#264DE4"></path>
+                                        <path d="M212.416703,314.546637 L232.277802,92.0573187 L128,92.0573187 L128,337.950242 L212.416703,314.546637 L212.416703,314.546637 Z" fill="#2965F1"></path>
+                                        <path d="M53.6685714,188.636132 L56.530989,220.572835 L128,220.572835 L128,188.636132 L53.6685714,188.636132 L53.6685714,188.636132 Z" fill="#EBEBEB"></path>
+                                        <path d="M47.917011,123.994725 L50.8202198,155.932132 L128,155.932132 L128,123.994725 L47.917011,123.994725 L47.917011,123.994725 Z" fill="#EBEBEB"></path>
+                                        <path d="M128,271.580132 L127.860044,271.617407 L92.2915165,262.013187 L90.0177582,236.54189 L57.957978,236.54189 L62.4323516,286.687648 L127.853011,304.848879 L128,304.808088 L128,271.580132 L128,271.580132 Z" fill="#EBEBEB"></path>
+                                        <path d="M60.4835165,0 L99.1648352,0 L99.1648352,16.1758242 L76.6593407,16.1758242 L76.6593407,32.3516484 L99.1648352,32.3516484 L99.1648352,48.5274725 L60.4835165,48.5274725 L60.4835165,0 L60.4835165,0 Z" fill="#000000"></path>
+                                        <path d="M106.901099,0 L145.582418,0 L145.582418,14.0659341 L123.076923,14.0659341 L123.076923,16.8791209 L145.582418,16.8791209 L145.582418,49.2307692 L106.901099,49.2307692 L106.901099,34.4615385 L129.406593,34.4615385 L129.406593,31.6483516 L106.901099,31.6483516 L106.901099,0 L106.901099,0 Z" fill="#000000"></path>
+                                        <path d="M153.318681,0 L192,0 L192,14.0659341 L169.494505,14.0659341 L169.494505,16.8791209 L192,16.8791209 L192,49.2307692 L153.318681,49.2307692 L153.318681,34.4615385 L175.824176,34.4615385 L175.824176,31.6483516 L153.318681,31.6483516 L153.318681,0 L153.318681,0 Z" fill="#000000"></path>
+                                        <path d="M202.126769,188.636132 L207.892396,123.994725 L127.889582,123.994725 L127.889582,155.932132 L172.892132,155.932132 L169.98611,188.636132 L127.889582,188.636132 L127.889582,220.572835 L167.216527,220.572835 L163.509451,261.992791 L127.889582,271.606857 L127.889582,304.833407 L193.362286,286.687648 L193.842637,281.291956 L201.347516,197.212132 L202.126769,188.636132 L202.126769,188.636132 Z" fill="#FFFFFF"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="col-9">
+                                <h5 class="font-weight-bold">CSS</h5>
+                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                            </div>
+                        </div>
+                        <!-- Grid row -->
 
-</div>
-<div class="container-fluid m-0 mt-1">
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
+                        <!-- Grid row -->
+                        <div class="row mb-2">
+                            <div class="col-3 align-self-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-label="JavaScript" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f7df1e"/><path d="M324 370c10 17 24 29 47 29c20 0 33-10 33 -24c0-16 -13 -22 -35 -32l-12-5c-35-15 -58 -33 -58 -72c0-36 27 -64 70 -64c31 0 53 11 68 39l-37 24c-8-15 -17 -21 -31 -21c-14 0-23 9 -23 21c0 14 9 20 30 29l12 5c41 18 64 35 64 76c0 43-34 67 -80 67c-45 0-74 -21 -88 -49zm-170 4c8 13 14 25 31 25c16 0 26-6 26 -30V203h48v164c0 50-29 72 -72 72c-39 0-61 -20 -72 -44z"/></svg>
+                            </div>
+                            <div class="col-9">
+                                <h5 class="font-weight-bold">JavaScript</h5>
+                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                            </div>
+                        </div>
+                        <!-- Grid row -->
 
-      <div class="carousel-item active">
-        <div class="card d-block w-100 mb-3" style="background-color: #003366; color: #e0ffcc">
-          <div class="card-header">
-            <h1>Incepe o cariera in programare</h1>
-          </div>
-          <div class="card-body p-5" style="font-weight: lighter; font-size: 25px">Proiectul Programing School a fost
-            fondat cu ideea unui centru educațional inovator și modern,
-            care creează adevărați profesioniștiîn lumea programării. Pentru noi...</div>
-          <div class="card-footer">Citeste mai departe</div>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 mb-2 text-md-left align-self-center">
+                        <img class="img-fluid" src="https://media.gcflearnfree.org/content/55e0730c7dd48174331f5164_01_17_2014/whatisacomputer_mac.jpg" alt="" class="z-depth-0"></div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div
+                            class="col-md-4">
+
+                            <!-- Grid row -->
+                            <div class="row mb-2">
+                                <div class="col-3 align-self-center">
+                                  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient id="a" x1="-133.268" y1="-202.91" x2="-133.198" y2="-202.84" gradientTransform="translate(25243.061 38519.17) scale(189.38 189.81)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#387eb8"/><stop offset="1" stop-color="#366994"/></linearGradient><linearGradient id="b" x1="-133.575" y1="-203.203" x2="-133.495" y2="-203.133" gradientTransform="translate(25309.061 38583.42) scale(189.38 189.81)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffe052"/><stop offset="1" stop-color="#ffc331"/></linearGradient></defs><title>file_type_python</title><path d="M15.885,2.1c-7.1,0-6.651,3.07-6.651,3.07V8.36h6.752v1H6.545S2,8.8,2,16.005s4.013,6.912,4.013,6.912H8.33V19.556s-.13-4.013,3.9-4.013h6.762s3.772.06,3.772-3.652V5.8s.572-3.712-6.842-3.712h0ZM12.153,4.237a1.214,1.214,0,1,1-1.183,1.244v-.02a1.214,1.214,0,0,1,1.214-1.214h0Z" style="fill:url(#a)"/><path d="M16.085,29.91c7.1,0,6.651-3.08,6.651-3.08V23.65H15.985v-1h9.47S30,23.158,30,15.995s-4.013-6.912-4.013-6.912H23.64V12.4s.13,4.013-3.9,4.013H12.975S9.2,16.356,9.2,20.068V26.2s-.572,3.712,6.842,3.712h.04Zm3.732-2.147A1.214,1.214,0,1,1,21,26.519v.03a1.214,1.214,0,0,1-1.214,1.214h.03Z" style="fill:url(#b)"/></svg>
+                                </div>
+                                <div class="col-9">
+                                    <h5 class="font-weight-bold">Python</h5>
+                                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                </div>
+                            </div>
+                            <!-- Grid row -->
+
+                            <!-- Grid row -->
+                            <div class="row mb-2">
+                                <div class="col-3 align-self-center">
+                                  <svg viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+                                    <g>
+                                        <path d="M0,222.991225 C0,241.223474 14.7785318,256 33.0087747,256 L222.991225,256 C241.223474,256 256,241.221468 256,222.991225 L256,33.0087747 C256,14.7765263 241.221468,0 222.991225,0 L33.0087747,0 C14.7765263,0 0,14.7785318 0,33.0087747 L0,222.991225 Z" fill="#563D7C"></path>
+                                        <path d="M106.157563,113.238095 L106.157563,76.9845938 L138.069328,76.9845938 C141.108559,76.9845938 144.039202,77.2378593 146.861345,77.7443978 C149.683488,78.2509362 152.179961,79.1554557 154.35084,80.4579832 C156.52172,81.7605107 158.258397,83.5695496 159.560924,85.8851541 C160.863452,88.2007585 161.514706,91.1675823 161.514706,94.7857143 C161.514706,101.298352 159.560944,106.001853 155.653361,108.896359 C151.745779,111.790864 146.752832,113.238095 140.67437,113.238095 L106.157563,113.238095 L106.157563,113.238095 Z M72.07493,50.5 L72.07493,205.5 L147.186975,205.5 C154.133788,205.5 160.899594,204.631661 167.484594,202.894958 C174.069594,201.158255 179.93088,198.480877 185.068627,194.862745 C190.206375,191.244613 194.294803,186.577293 197.334034,180.860644 C200.373264,175.143996 201.892857,168.37819 201.892857,160.563025 C201.892857,150.866431 199.541107,142.581033 194.837535,135.706583 C190.133963,128.832132 183.00635,124.020088 173.454482,121.270308 C180.401295,117.941627 185.647508,113.672295 189.193277,108.462185 C192.739047,103.252075 194.511905,96.7395349 194.511905,88.9243697 C194.511905,81.6881057 193.317939,75.6097352 190.929972,70.6890756 C188.542005,65.7684161 185.177193,61.8247114 180.835434,58.8578431 C176.493676,55.8909749 171.283644,53.756309 165.205182,52.4537815 C159.12672,51.151254 152.397096,50.5 145.016106,50.5 L72.07493,50.5 L72.07493,50.5 Z M106.157563,179.015406 L106.157563,136.466387 L143.279412,136.466387 C150.660401,136.466387 156.594049,138.166883 161.080532,141.567927 C165.567016,144.968971 167.810224,150.649353 167.810224,158.609244 C167.810224,162.661552 167.122789,165.990183 165.747899,168.595238 C164.373009,171.200293 162.527789,173.262597 160.212185,174.782213 C157.89658,176.301828 155.219203,177.387252 152.179972,178.038515 C149.140741,178.689779 145.956833,179.015406 142.628151,179.015406 L106.157563,179.015406 L106.157563,179.015406 Z" fill="#FFFFFF"></path>
+                                    </g>
+                                </svg>
+                                </div>
+                                <div class="col-9">
+                                    <h5 class="font-weight-bold">Bootstrap</h5>
+                                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                </div>
+                            </div>
+                            <!-- Grid row -->
+
+                            <!-- Grid row -->
+                            <div class="row mb-2">
+                                <div class="col-3 align-self-center">
+                                  <svg viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+                                    <g>
+                                        <rect fill="#092E20" x="0" y="0" width="256" height="256" rx="28"></rect>
+                                        <path d="M186.377012,94.197636 L186.377012,160.424478 C186.377012,183.243286 184.707519,194.187745 179.699037,203.649406 C175.060358,212.741266 168.937684,218.490548 156.323731,224.798721 L129.794937,212.183571 C142.410087,206.247593 148.531564,201.05481 152.427049,193.074749 C156.509231,184.91278 157.808923,175.451119 157.808923,150.593015 L157.808923,94.197636 L186.377012,94.197636 Z M140.928486,50.0787207 L140.928486,182.316986 C126.272844,185.099476 115.512688,186.212472 103.826231,186.212472 C68.9487718,186.212472 50.7686431,170.445031 50.7686431,140.205054 C50.7686431,111.079269 70.0629644,92.1583404 99.9295492,92.1583404 C104.567032,92.1583404 108.091519,92.5281423 112.359199,93.6411381 L112.359199,50.0787207 L140.928486,50.0787207 Z M102.713236,115.160254 C88.243093,115.160254 79.8944275,124.065418 79.8944275,139.647359 C79.8944275,154.860696 87.8720944,163.208164 102.527736,163.208164 C105.680028,163.208164 108.278215,163.022665 112.359199,162.467364 L112.359199,116.643052 C109.020212,115.531253 106.237722,115.160254 102.713236,115.160254 Z M186.377012,50.2307105 L186.377012,79.5419941 L157.808923,79.5419941 L157.808923,50.2307105 L186.377012,50.2307105 Z" fill="#FFFFFD"></path>
+                                    </g>
+                                </svg>
+                                </div>
+                                <div class="col-9">
+                                    <h5 class="font-weight-bold">Django</h5>
+                                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                </div>
+                            </div>
+                            <!-- Grid row -->
+
+                        </div>
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                </div>
+
+            </section>
         </div>
-      </div>
-
-
-      <div class="carousel-item">
-        <div class="card d-block w-100" style="background-color: #003366; color: #e0ffcc">
-          <div class="card-header">
-            <h1>Programare cu Python</h1>
-          </div>
-          <div class="card-body p-5" style="font-weight: lighter; font-size: 25px">Cursul „Program cu Python” se
-            concentrează pe obținerea cunoștințelor aprofundate despre
-            programare cu limbajul de programare Python. Elevii vor...</div>
-          <div class="card-footer">Citeste mai departe</div>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <div class="card d-block w-100" style="background-color: #003366; color: #e0ffcc">
-          <div class="card-header">
-            <h1>Aptitudini practice</h1>
-          </div>
-          <div class="card-body p-5" style="font-weight: lighter; font-size: 25px">Accentul modelului nostru
-            de formare este transformarea cunoștințelor dobândite în abilități practice reale și, prin urmare,
-            pregătirea este combinată cu ...</div>
-          <div class="card-footer">Citeste mai departe</div>
-        </div>
-      </div>
-
-
-
-
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  </div>
-  {% endblock%}
+          {% endblock %}

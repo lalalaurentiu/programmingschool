@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-light scrolling-navbar">
+    <div class="container">
+        <a class="navbar-brand link-dark" href="#">
+            <strong>Programming School</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown text-black">
+                    <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="clearfix d-none d-sm-inline-block">IDE</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{% url 'IDE:python_ide' %}">
+                            <i class="fab fa-python"></i>
+                            Python</a>
+                        <a class="dropdown-item" href="{% url 'sql_ide:sql_ide' %}">
+                            <i class="fas fa-database"></i>
+                            Sql BETA</a>
+                        <a class="dropdown-item" href="{% url 'HTMLIDE:html_css_js_ide' %}">
+                            <i class="fab fa-html5"></i>
+                            HTML
+                            <i class="fab fa-css3-alt"></i>
+                            CSS
+                            <i class="fab fa-js-square"></i>
+                            JS
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">Programming language</a>
+                    <div class="dropdown-menu">
+                        {% for c in categories %}
+                            <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.title }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                {% block navbar %}{% endblock %}
+            </ul>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a aria-expanded="false" data-toggle="dropdown" class="btn dropdown-toggle nav-link btn-md btn-info mt-3 text-dark">
+                            Welcome
+                            {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu">
+
+                            <div>
+                                <a class="btn btn-sm" style="font-size: 18px" href="{% url 'logout' %}">Sign Out</a>
+                            </div>
+                            <div>
+                                <a class="btn btn-sm" style="font-size: 18px" href="{% url 'profile' %}">Your
+                                                                        projects</a>
+                            </div>
+                        </div>
+
+                    {% else %}
+                        <a class="btn btn-primary btn-sm mr-2" href="{% url 'register' %}">Sign
+                                                            Up</a>
+                        <a class="btn btn-success btn-sm" href="{% url 'login' %}">Login</a>
+
+                    {% endif %}
+                </ul>
+        </div>
+    </div>
+</nav>
