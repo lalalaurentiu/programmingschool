@@ -88,13 +88,13 @@
                       </h4>
 
                       <div class="inline-ul text-center d-flex justify-content-center">
-                        <a class="p-2 m-2 fa-lg tw-ic">
+                        <a class="p-2 m-2 fa-lg tw-ic" href="{% url 'social:begin' 'facebook' %}">
                           <i class="fab fa-facebook-f fa-lg"></i>
                         </a>
-                        <a class="p-2 m-2 fa-lg li-ic">
+                        <a class="p-2 m-2 fa-lg li-ic" href="{% provider_login_url 'google' %}">
                           <i class="fab fa-google fa-lg"> </i>
                         </a>
-                        <a class="p-2 m-2 fa-lg ins-ic">
+                        <a class="p-2 m-2 fa-lg ins-ic" href="{% url 'social:begin' 'github' %}">
                           <i class="fab fa-github fa-lg"> </i>
                         </a>
                       </div>
@@ -126,9 +126,6 @@
                       <button type="submit" class="btn btn-indigo btn-rounded mt-5 waves-effect waves-light">Sign up</button>
                     </div> 
                     </form>
-
-                    
-
                   </div>
                   <!-- Grid column -->
 
@@ -146,87 +143,4 @@
 
       </div>
     </div>
-
-
-<div class="container-fluid text-center">
-    <div class="row justify-content-sm-center">
-        <div class="col col-sm-5 pt-5 bg-warning text-dark p-3"
-            style="font-family: Montserrat,sans-serif; background-image: linear-gradient(#fafa07, #5df5bb)">
-            <h1 class="text-center">Welcome</h1>
-            <h3>to</h3>
-            <h2><strong>Programming</strong></h2>
-            <h3><strong>School</strong></h3>
-            <hr>
-            <h5 class="text-secondary">connect with</h5>
-            <p></p>
-            <a class="btn btn-primary btn-sm mb-2" href="{% url 'social:begin' 'facebook' %}">{% bs_icon "facebook"
-                %}facebook</a>
-            <a class="btn btn-danger btn-sm mb-2" href="{% provider_login_url 'google' %}">{% bs_icon "google"
-                %}Google</a>
-            <a class="btn btn-light btn-sm mb-2" href="{% url 'social:begin' 'github' %}">{% bs_icon "github"
-                %}GitHub</a>
-
-        </div>
-
-        <div class="col col-sm-7">
-
-
-
-            <div class="row text-dark">
-                <div class="col-sm pt-3 pb-3 text-warning bg-dark">
-                    <h2 style="left: 15px">Sign Up</h2>
-                </div>
-            </div>
-
-
-            <div class="row text-warning bg-dark">
-                <div class="col-sm-10 pl-3">
-
-
-                    <form method="post">
-                        {% csrf_token %}
-                        <p></p>
-                        {{ form.username }}<p></p>
-
-                        {{ form.first_name }}<p></p>
-
-                        {{ form.last_name }}<p></p>
-
-                        {{ form.email }}<p></p>
-
-                        <input type="password" class="form-control" style="width: 200px" placeholder="Password" {{
-                            form.password1 }}>
-                        <p></p>
-                        <input type="password" class="form-control" style="width: 200px" placeholder="Confirm password"
-                            {{ form.password2 }}> <br>
-
-
-                        <div class="row row-cols-auto pb-3">
-                            <div class="col pb-2">
-                                <button type="submit" class="btn btn-danger btn-md">Register</button>
-                            </div>
-                            <div class="col">
-                                <a href="{% url 'login' %}"><button type="button" class="btn btn-info btn-md">back to
-                                        LOGIN</button></a>
-                            </div>
-                        </div>
-                    </form>
-
-
-                </div>
-                <div class="col col-sm-4 pt-5">
-
-                </div>
-            </div>
-
-
-
-        </div>
-
-
-    </div>
-</div>
-
-
-
 {% endblock %}
