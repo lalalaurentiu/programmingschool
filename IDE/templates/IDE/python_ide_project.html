@@ -1,29 +1,26 @@
 {% extends 'home/base.html' %}
-{% load static %}
 {% load bootstrap_icons %}
 
 {% block title %}Python IDE{% endblock %}
 
 {% block head %} 
-<link rel="stylesheet" type="text/css" media="all" href="{% static "python_interpretor/css/codemirror.css"%}">
-<link rel="stylesheet" type="text/css" media="all" href="{% static "python_interpretor/css/solarized.css"%}">
+<script src="/static/js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">
+<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">
 
-<script src="{% static "python_interpretor/js/skulpt.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/skulpt-stdlib.js" %}" type="text/javascript"></script> 
-<script src="{% static "python_interpretor/js/codemirrorepl.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/repl.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/python.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/editor.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/plugins.js" %}" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/skulpt.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/skulpt-stdlib.js" type="text/javascript"></script> 
+<script src="/static/python_interpretor/js/codemirrorepl.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/repl.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/python.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/editor.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/plugins.js" type="text/javascript"></script>
 
-<script src="{% static "python_interpretor/js/misceval.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/modernizr.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/foundation.min.js" %}" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-<div class="container p-3 ">
+<div class="container mt-5">
 <form method="post">
 <button  onclick="send()" class="btn btn-outline-secondary " type="submit">Save Project</button>        
 {% csrf_token %}
@@ -64,13 +61,6 @@
 
 </div>
 {% else %}
-<style>
-        footer {
-        position:absolute;
-        bottom:0;
-        width:100%;
-     }
-</style>
 <p><b>You must first login</b></p>
 {% endif %}
 {% endblock %}

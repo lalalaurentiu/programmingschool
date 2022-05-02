@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown text-black">
-                    <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle waves-effect" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="clearfix d-none d-sm-inline-block">IDE</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -30,7 +30,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">Programming language</a>
+                    <a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link " href="#">Programming language</a>
                     <div class="dropdown-menu">
                         {% for c in categories %}
                             <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.title }}</a>
@@ -39,29 +39,21 @@
                 </li>
                 {% block navbar %}{% endblock %}
             </ul>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav text-black">
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a aria-expanded="false" data-toggle="dropdown" class="btn dropdown-toggle nav-link btn-md btn-info mt-3 text-dark">
+                        <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Welcome
                             {{ user.username }}
                         </a>
-                        <div class="dropdown-menu">
-
-                            <div>
-                                <a class="btn btn-sm" style="font-size: 18px" href="{% url 'logout' %}">Sign Out</a>
-                            </div>
-                            <div>
-                                <a class="btn btn-sm" style="font-size: 18px" href="{% url 'profile' %}">Your
-                                                                        projects</a>
-                            </div>
+                        <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" style="font-size: 18px" href="{% url 'logout' %}">Sign Out</a>
+                                <a class="dropdown-item" style="font-size: 18px" href="{% url 'profile' %}">Your projects</a>
                         </div>
 
                     {% else %}
-                        <a class="btn btn-primary btn-sm mr-2" href="{% url 'register' %}">Sign
-                                                            Up</a>
+                        <a class="btn btn-primary btn-sm mr-2" href="{% url 'register' %}">Sign Up</a>
                         <a class="btn btn-success btn-sm" href="{% url 'login' %}">Login</a>
-
                     {% endif %}
                 </ul>
         </div>

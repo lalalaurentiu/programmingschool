@@ -28,10 +28,23 @@
 
     <body class="landing-page">
         {% include 'includes/navbar.html' %} 
-            {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
 
-            {% include 'includes/footer.html' %}
-            {% include 'includes/scripts.html' %}
-        </body>
+        {% include 'includes/footer.html' %}
+        {% include 'includes/scripts.html' %}
+        {% if messages %}
+            {% for message in messages %}
+                <script>
+                Swal.fire({
+                    position: 'top-end',
+                    type: '{{ message.tags }}',
+                    text: '{{ message }}',
+                    showConfirmButton: true,
+                    confirmButtonColor:"#9c27b0"
+                })
+                </script>
+            {% endfor %}
+        {% endif %}
+    </body>
         
 </html>
