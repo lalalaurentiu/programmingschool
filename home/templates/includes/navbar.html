@@ -50,10 +50,12 @@
                                 <a class="dropdown-item" style="font-size: 18px" href="{% url 'logout' %}">Sign Out</a>
                                 <a class="dropdown-item" style="font-size: 18px" href="{% url 'profile' %}">Your projects</a>
                         </div>
-
+                        </li>
                     {% else %}
-                        <a class="btn btn-primary btn-sm mr-2" href="{% url 'register' %}">Sign Up</a>
-                        <a class="btn btn-success btn-sm" href="{% url 'login' %}">Login</a>
+                        <li>
+                            <a class="btn btn-primary btn-sm mr-2" href="{% url 'register' %}">Sign Up</a>
+                            <a class="btn btn-success btn-sm" href="{% url 'login' %}">Login</a>
+                        </li>
                     {% endif %}
                 </ul>
         </div>
