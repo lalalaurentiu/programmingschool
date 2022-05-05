@@ -24,14 +24,18 @@
 
 
     </head>
-    {% block html %}{% endblock %}
 
     <body class="landing-page">
-        {% include 'includes/navbar.html' %} 
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light scrolling-navbar double-nav">
+            <div class="container">
+            {% block sidebar %}{% endblock %}
+            {% include 'includes/navbar.html' %}
+            </div>
+        </nav> 
         {% block content %}{% endblock %}
 
         {% include 'includes/footer.html' %}
-        {% include 'includes/scripts.html' %}
+        {% block scripts %}{% include 'includes/scripts.html' %}{% endblock %}
         {% if messages %}
             {% for message in messages %}
                 <script>
