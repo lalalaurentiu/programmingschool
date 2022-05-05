@@ -21,7 +21,8 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<div class="pt-5 ">
+<div class="container-fluid">
+<div class="pt-5">
 <div class="mt-5">
 <form method="post" >     
 {% csrf_token %}
@@ -76,9 +77,9 @@
 </pre>
 </div>
 </div>
-
-
 </div>
+</div>
+
 {% else %}
 <div class="pt-5">
 <div class="mt-5 ">
