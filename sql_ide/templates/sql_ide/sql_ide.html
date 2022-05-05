@@ -1,103 +1,109 @@
 {% extends 'home/base.html' %}
 {% load static %}
-{% load bootstrap4 %}
 {% load bootstrap_icons %}
 
 
-
 {% block content %}
-<style>
-    table, th, td {
-      border:1px solid black;
-      width: 100vw;
-     padding: 10px;
-    }
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            width: 100vw;
+            padding: 10px;
+        }
     </style>
-    <div class="p-3">
-        <h1>IDE SQL BETA</h1>
-        <p>
-            SQL (Structured Query Language) este un limbaj de programare standardizat care este folosit pentru a gestiona bazele de date relaționale și pentru a efectua diverse operații asupra datelor din acestea. <br>
-            Acest IDE este bazat pe biblioteca <a href="https://docs.python.org/3/library/sqlite3.html">Sqlite3</a> 
-        </p>
-        <div class="container row">
-            <ul class="col">
-                Permite doar operatiunile CRUD
-                <li>
-                    C : CREATE
-                </li>
-                <li>
-                    R: READ
-                </li>
-                <li>
-                    U: UPDATE
-                </li>
-                <li>
-                    D: DELETE
-                </li>
-            </ul>
-            <ul class="col">
-                Tipuri de date acceptate 
-                <li>
-                    NULL
-                </li>
-                <li>
-                    INTEGER
-                </li>
-                <li>
-                    REAL
-                </li>
-                <li>
-                    TEXT
-                </li>
-                <li>
-                    BLOB
-                </li>
-            </ul>
-        </div>
-        
-    </div>
-<div class="p-3">
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input class="btn btn-default btn-danger" type="submit" value="submit"/>
-</form>
-</div>
-<div class="text-center">
-    
-    <table>
-        <tr>
-            {% if columns %}
-            {% for column in columns %}
-            <th>{{ column }}</th>
-            {% endfor %}
-            {% else %}
-            <b>No columns</b><br>
-            {% endif %}
-        </tr>
-            {% if rows %}
-            {% for row in rows %}
-            <tr>
-                {% for r in row %}
-            <td>{{ r }}</td>
-            {% endfor %}
-            </tr>
-            {% endfor %}
-            {% else %}
-            <b>No rows</b>
-            {% endif %}
-    </table>
+    <div class="mt-5">
+        <div class="p-3">
+            <h1>IDE SQL BETA</h1>
+            <p>
+                SQL (Structured Query Language) este un limbaj de programare standardizat care este folosit pentru a gestiona bazele de date relaționale și pentru a efectua diverse operații asupra datelor din acestea.
+                <br>
+                    Acest IDE este bazat pe biblioteca
+                    <a href="https://docs.python.org/3/library/sqlite3.html">Sqlite3</a>
+                </p>
+                <div class="container row">
+                    <ul class="col">
+                        Permite doar operatiunile CRUD
+                        <li>
+                            C : CREATE
+                        </li>
+                        <li>
+                            R: READ
+                        </li>
+                        <li>
+                            U: UPDATE
+                        </li>
+                        <li>
+                            D: DELETE
+                        </li>
+                    </ul>
+                    <ul class="col">
+                        Tipuri de date acceptate
+                        <li>
+                            NULL
+                        </li>
+                        <li>
+                            INTEGER
+                        </li>
+                        <li>
+                            REAL
+                        </li>
+                        <li>
+                            TEXT
+                        </li>
+                        <li>
+                            BLOB
+                        </li>
+                    </ul>
+                </div>
 
-    {% if errors %}
-    {% for error in errors%}
-        {% autoescape off %}{{ error }}{% endautoescape %} 
-    {% endfor %}
-    {% endif %}        
+            </div>
+            <div class="p-3">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                        <input class="btn btn-default btn-danger" type="submit" value="submit"/>
+                    </form>
+                </div>
+                <div class="text-center">
 
-    {% if messages %}
-        {% for message in messages %}
-        {% autoescape off %}{{ message }}{% endautoescape %} 
-        {% endfor %}
-    {% endif %}
-</div>
-{% endblock %}
+                    <table>
+                        <tr>
+                            {% if columns %}
+                                {% for column in columns %}
+                                    <th>{{ column }}</th>
+                                {% endfor %}
+                            {% else %}
+                                <b>No columns</b>
+                                <br>
+                                {% endif %}
+                            </tr>
+                            {% if rows %}
+                                {% for row in rows %}
+                                    <tr>
+                                        {% for r in row %}
+                                            <td>{{ r }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <b>No rows</b>
+                            {% endif %}
+                        </table>
+
+                        {% if errors %}
+                            {% for error in errors %}
+                                    {{ error|safe }}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if message %}
+                            {% for message in messages %}
+                                    {{ message|safe }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+            {% endblock %}

@@ -1,5 +1,3 @@
-
-from os import error
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 import sqlite3
@@ -15,7 +13,7 @@ class SqlIde(TemplateView):
     columns = []
     rows = []
     errors = []
-    messages = []
+    message = []
     
     def get(self, request):
         form = SqlIdeForm()
@@ -25,19 +23,19 @@ class SqlIde(TemplateView):
             "columns": self.columns,
             "rows": self.rows,
             "errors":self.errors,
-            "messages":self.messages
+            "messages":self.message
             }
         return render(request, self.template_name, context)
 
     def post(self, request):
-        form = SqlIdeForm(request.POST)
+        form = SqlIdeForm(request.POST, )
         self.columns.clear()
         self.rows.clear()
         self.errors.clear()
-        self.messages.clear()
+        self.message.clear()
 
         if form.is_valid():
-            inquiry = request.POST.get('inquiry')
+            inquiry = request.POST.get('interogare')
 
             if "create" in inquiry.lower():
                 try:
@@ -45,7 +43,7 @@ class SqlIde(TemplateView):
                     self.connect.commit()
                     column = self.cursor.description
                     table = inquiry.replace("(", "").split()
-                    self.messages.append(f"<b>Table {table[2]} created successfully</b>")
+                    self.message.append(f"<b>Table {table[2]} created successfully</b>")
                 except Exception as err:
                     self.errors.append(f"<div class='text-center' style='color:red'> <b>Type of error: {type(err).__name__}</b> <br> <b>Error: {str(err)}</b> <br> <b>Query failed: {str(inquiry)}</b></div>")
 
@@ -57,8 +55,6 @@ class SqlIde(TemplateView):
                     column = self.cursor.description
                     for c in column:
                         self.columns.append(c[0])
-
-
                 except Exception as err:
                     self.errors.append(f"<div class='text-center' style='color:red'> <b>Type of error: {type(err).__name__}</b> <br> <b>Error: {str(err)}</b> <br> <b>Query failed: {str(inquiry)}</b> </div>")
 
@@ -68,7 +64,7 @@ class SqlIde(TemplateView):
                     self.connect.commit()
                     column = self.cursor.description
                     method = inquiry.split()
-                    self.messages.append(f"<b>{method[0]} successfully</b>")
+                    self.message.append(f"<b>{method[0]} successfully</b>")
                 except Exception as err:
                     self.errors.append(f"<div class='text-center' style='color:red'> <b>Type of error: {type(err).__name__}</b> <br> <b>Error: {str(err)}</b> <br> <b>Query failed: {str(inquiry)}</b></div>")
             else:
@@ -76,7 +72,7 @@ class SqlIde(TemplateView):
                     self.cursor.execute(str(inquiry))
                     self.connect.commit()
                     method = inquiry.split()
-                    self.messages.append(f"<b>{method[0]} successfully</b>")
+                    self.message.append(f"<b>{method[0]} successfully</b>")
                 except Exception as err:
                     self.errors.append(f"<div class='text-center' style='color:red'> <b>Type of error: {type(err).__name__}</b> <br> <b>Error: {str(err)}</b> <br> <b>Query failed: {str(inquiry)}</b></div>")
 
