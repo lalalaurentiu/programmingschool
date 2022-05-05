@@ -3,22 +3,21 @@
 {% load bootstrap4 %}
 {% load bootstrap_icons %}
 
-
-
 {% block head %} 
-<link rel="stylesheet" type="text/css" media="all" href="{% static "python_interpretor/css/codemirror.css"%}">
-<link rel="stylesheet" type="text/css" media="all" href="{% static "python_interpretor/css/solarized.css"%}">
+
+<script src="/static/js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">
+<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">
+
+<script src="/static/python_interpretor/js/skulpt.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/skulpt-stdlib.js" type="text/javascript"></script> 
+<script src="/static/python_interpretor/js/codemirrorepl.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/repl.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/python.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/editor.js" type="text/javascript"></script>
+<script src="/static/python_interpretor/js/plugins.js" type="text/javascript"></script>
 
 
-<script src="{% static "python_interpretor/js/skulpt.js" %}" type="text/javascript"></script> 
-<script src="{% static "python_interpretor/js/skulpt-stdlib.js" %}" type="text/javascript"></script> 
-<script src="{% static "python_interpretor/js/codemirrorepl.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/repl.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/python.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/editor.js" %}" type="text/javascript"></script>
-<script src="{% static "python_interpretor/js/plugins.js" %}" type="text/javascript"></script>
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
         swal-html {
@@ -55,3 +54,4 @@
 </div>
 </div>
 {% endblock %}
+{% block scripts %}{% include 'includes/scripts.html' %}{% endblock %}

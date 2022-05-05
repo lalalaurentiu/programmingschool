@@ -17766,7 +17766,7 @@ img.rounded-circle {
     background: url("https://mdbootstrap.com/img/Photos/Others/img%20(42).jpg") no-repeat center center;
     background-size: cover; }
   .landing-page .navbar:not(.top-nav-collapse) {
-    background: transparent; }
+    background: #9da4b1; }
   @media (max-width: 768px) {
     .landing-page .navbar:not(.top-nav-collapse) {
       background: #9da4b1; } }
