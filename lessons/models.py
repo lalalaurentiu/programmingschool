@@ -13,7 +13,7 @@ class Category(models.Model):
         return self.title
 
 class Lessons(models.Model):
-    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE, related_name="lessons")
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=250, unique=True)
     content = models.TextField()
@@ -25,7 +25,7 @@ class Lessons(models.Model):
         return self.title
 
 class Lesson(models.Model):
-    category = models.ForeignKey(Lessons, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Lessons, null=True, on_delete=models.CASCADE, related_name="lesson")
     title = models.CharField(max_length=200, blank=True)
     slug = models.SlugField(max_length=250, unique=True)
     content = models.TextField()

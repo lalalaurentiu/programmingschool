@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from .forms import UserRegisterForm 
 from django.contrib.auth.decorators import login_required
@@ -6,6 +6,7 @@ from django.contrib.auth import logout
 import users.models as model
 from lessons.models import Category
 from django.contrib.auth.views import LoginView
+from django.views.generic import TemplateView
 
 
 
@@ -57,3 +58,18 @@ def html_css_js_projects(request):
         'html_css_js_projects':html_css_js_projects
     }
     return render(request, 'user/html_css_js_projects.html', context)
+
+
+class AdminCategoryadd(TemplateView):
+    def get(self, request):
+        if request.user.is_staff:
+            template_name = "admin/Category.html"
+            category = Category.objects.all()
+            context = {
+                "categorys":category
+            }
+            response = render(request, template_name, context)
+            return response
+        else:
+            return HttpResponse(status = 401)
+

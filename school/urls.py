@@ -3,7 +3,12 @@ from django.urls import path, include, re_path
 from django .conf.urls.static import static
 from django.conf import settings
 from users import views as user_views
-from users.views import projects, html_css_js_projects , user_logout, UserView
+from users.views import(
+    projects, 
+    html_css_js_projects , 
+    user_logout, 
+    UserView
+) 
 from django.views.static import serve
 from users.forms import LoginForm
 
@@ -26,7 +31,9 @@ urlpatterns = [
     path('projects/', projects, name='projects'),
     path('html_css_js_projects/', html_css_js_projects, name='html_css_js_projects'),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media')
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
+    # staff
+    path("staff/", include("users.urls", namespace="staff")),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

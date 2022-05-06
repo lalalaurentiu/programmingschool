@@ -4,7 +4,7 @@ from lessons.models import Lessons
 from django.urls import reverse
 
 class Exercise(models.Model):
-    category = models.ForeignKey(Lessons, null=True, on_delete=CASCADE)
+    category = models.ForeignKey(Lessons, null=True, on_delete=CASCADE, related_name="exercise")
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(blank=True)
