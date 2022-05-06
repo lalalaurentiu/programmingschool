@@ -1,5 +1,12 @@
 from django.urls import path
-from .views import HtmlCssJsProjectSave, HtmlCssJsProjectLoad, html_css_js, html_css_js_ide, load_html_css_js, delete_project
+from .views import(
+    HtmlCssJsProjectSave, 
+    HtmlCssJsProjectLoad, 
+    html_css_js, 
+    html_css_js_ide, 
+    load_html_css_js, 
+    delete_project
+) 
 
 app_name = 'HTMLIDE'
 

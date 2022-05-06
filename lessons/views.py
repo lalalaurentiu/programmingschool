@@ -1,14 +1,22 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Category, Lessons, Lesson
+from django.shortcuts import(
+    render,
+    get_object_or_404
+) 
+from .models import(
+    Category, 
+    Lessons, 
+    Lesson
+) 
 from python_exercise.models import Exercise
 from django.views.decorators.clickjacking import xframe_options_exempt
 
-categories = Category.objects.all()
+
 
 #functia pentru lectii
 
 def lessons(request, lesson_slug = None):
     lessons = Lessons.objects.all()
+    categories = Category.objects.all()
     category_name = None
     if lesson_slug:
         category_name = get_object_or_404(categories, slug=lesson_slug)
@@ -35,8 +43,7 @@ def lesson(request, slug = None):
 
             context = {
                 'lessons_content': lessons_content.order_by("id"),
-                'lessons_name':lesson_name, 
-                'categories':categories,
+                'lessons_name':lesson_name,
                 'exercise':exercise,
                 'lessons':lessons.filter(category = lesson_name.category),
                 "category":str(lesson_name.category)
@@ -48,7 +55,6 @@ def lesson(request, slug = None):
             context = {
                 'lessons_content': lessons_content, 
                 'lessons_name':lesson_name, 
-                'categories':categories, 
                 'lessons':lessons.filter(category = lesson_name.category), 
                 "category":str(lesson_name.category)
                 }
@@ -66,8 +72,7 @@ def lesson_code(request, slug = None):
 
         context = {
             'lessons_content': lessons_content, 
-            'lessons_name':lesson_name, 
-            'categories':categories
+            'lessons_name':lesson_name,
             }
 
     return render(request, 'ide/html_ide.html', context)

@@ -4,7 +4,11 @@ from lessons.models import Category
 
 
 def homepost(request):
+    template_name = 'home/posts/home.html'
     post = HomePost.objects.all()
-    categories = Category.objects.all()
-    return render(request, 'home/posts/home.html', {'post':post, 'categories':categories})
+    context = {
+        'post':post,
+        }
+    response = render(request, template_name, context)
+    return response
 

@@ -2,7 +2,7 @@
 {% load static%}
 
 {% block head %} 
-<link rel="stylesheet" href="{% static 'css/html_leson.css' %}">
+  <link rel="stylesheet" href="{% static 'css/html_leson.css' %}">
 {% endblock %}
 
 {% block sidebar %}
@@ -15,13 +15,13 @@
 
 {% block exercise %}
   {% if exercise %}
-  <li class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link">Exercises</a>
-          <div class="dropdown-menu">
-                  {% for e in exercise %}
-                  <a class="dropdown-item" href="{{e.get_absolute_url}}"><i class="fab fa-python"></i> {{ e.title }}</a>
-                  {% endfor %}
-          </div> 
-  </li>
+    <li class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle nav-link">Exercises</a>
+        <div class="dropdown-menu">
+              {% for e in exercise %}
+                <a class="dropdown-item" href="{{e.get_absolute_url}}"><i class="fab fa-python"></i> {{ e.title }}</a>
+              {% endfor %}
+        </div> 
+    </li>
   {% endif %}
 {% endblock %}
 
@@ -31,27 +31,27 @@
     <ul class="list-unstyled components">
         <p>Lecti {{ category }}</p>
         {% for lesson in lessons %}
-        <li class="{% for content in lessons_content %}{% if lesson.id == content.id %}active{% endif %}{% endfor %}">
-            <a class="nav-link ms-3 anchor" href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a>
-        </li>
+          <li class="{% for content in lessons_content %}{% if lesson.id == content.id %}active{% endif %}{% endfor %}">
+              <a class="nav-link ms-3 anchor" href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a>
+          </li>
         {% endfor %}
     </ul>
-</nav>
+  </nav>
   <div class="pt-5 ml-1">
     <div class="mt-5">
       {% for lesson in lessons_content %}
       <h1>{{ lesson.title }}</h1>
-      {% autoescape off %}{{ lesson.content }}{% endautoescape %} 
-      {% if lesson.code_link %}
-      <div>
-              <button class="btn btn-primary" onclick="show()">Show code</button>
-      </div>
-      <script>
+        {% autoescape off %}{{ lesson.content }}{% endautoescape %} 
+        {% if lesson.code_link %}
+          <div>
+            <button class="btn btn-primary" onclick="show()">Show code</button>
+          </div>
+          <script>
               function show(){
                       window.open("{% url 'lessons:lessons_code' lesson.code_link %}")
               }
-      </script>
-      {% endif %}
+          </script>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -60,11 +60,11 @@
 
 {% block scripts %}
 {% include 'includes/scripts.html' %}
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-</script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $('#sidebarCollapse').on('click', function () {
+              $('#sidebar').toggleClass('active');
+          });
+      });
+  </script>
 {% endblock %}

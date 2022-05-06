@@ -1,13 +1,17 @@
 
-from IDE.forms import SaveProjects, SaveLoadProjects
-from django.shortcuts import redirect, render
+from IDE.forms import(
+    SaveProjects, 
+    SaveLoadProjects
+) 
+from django.shortcuts import(
+    redirect, 
+    render
+) 
 from lessons.views import Category
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User
 from users.models import Projects
 from django.contrib import messages
-
-categories = Category.objects.all()
 
 class PythonIde(TemplateView):
     template_name = 'IDE/python_ide.html'
@@ -16,7 +20,6 @@ class PythonIde(TemplateView):
         form = SaveProjects()
         users = User.objects.exclude(id=request.user.id)
         context = {
-            'categories': categories,
             'form': form,
             'users': users
         }
@@ -39,7 +42,6 @@ class PythonIdeProject(TemplateView):
         projects = Projects.objects.filter(project_title=project_title).first()
         form = SaveLoadProjects(instance=projects)
         context = {
-        'categories': categories,
         'projects': projects,
         'form':form,
         }

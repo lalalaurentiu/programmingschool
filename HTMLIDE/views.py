@@ -10,13 +10,9 @@ from users.models import Projects
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-
-categories = Category.objects.all()
-
 def html_css_js_ide(request, project_title = None):
     projects = Projects.objects.all()
     context = {
-        'categories':categories,
         'projects':projects
     }
     return render(request, 'HTMLIDE/html_css_js_ide.html', context)
@@ -30,7 +26,6 @@ def load_html_css_js(request, project_title):
     projects = HtmlProject.objects.filter(project_title=project_title).first()
     context = {
         "projects":projects,
-        "categories":categories
     }
     return render(request, 'HTMLIDE/load_html_css_js_project.html', context)
 
@@ -66,7 +61,6 @@ class HtmlCssJsProjectLoad(TemplateView):
         projects = HtmlProject.objects.filter(project_title=project_title).first()
         form = LoadHtmlCssJsProject(instance=projects)
         context = {
-        'categories': categories,
         'projects': projects,
         'form':form,
         }

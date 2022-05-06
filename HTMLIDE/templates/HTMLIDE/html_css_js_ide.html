@@ -1,18 +1,24 @@
 {% extends 'home/base.html' %}
 {% load static%}
-{% load bootstrap4 %}
 
-{% block title %}HTML, CSS, JavaScript IDE{% endblock %}
+{% block title %}
+        HTML, CSS, JavaScript IDE
+{% endblock %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
-<div class="container-fluid">
-        <iframe src="{% url 'HTMLIDE:html_ide' %}" height="800px" width="100%" style="border: 1px solid black;" frameborder="0"></iframe>
-</div>
+        <div class="pt-5">
+                <div class="container-fluid mt-5">
+                        <iframe src="{% url 'HTMLIDE:html_ide' %}" height="800px" width="100%" style="border: 1px solid black;" frameborder="0"></iframe>
+                </div>
+        </div>
 {% else %}
-<div class="container-fluid">
-        <iframe src="{% url 'HTMLIDE:html_ide' %}" height="800px" width="100%" style="border: 1px solid black;" frameborder="0"></iframe>
-</div>
-<p><b>To save your projects, please login </b></p>
+        <div class="pt-5">
+                <div class="container-fluid mt-5">
+                        <iframe src="{% url 'HTMLIDE:html_ide' %}" height="800px" width="100%" style="border: 1px solid black;" frameborder="0"></iframe>
+                </div>
+                <p><b>To save your projects, please login </b></p>
+        </div>
 {% endif %}
 {% endblock %}

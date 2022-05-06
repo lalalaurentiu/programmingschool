@@ -2,9 +2,6 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 import sqlite3
 from sql_ide.forms import SqlIdeForm
-from lessons.models import Category
-
-categories = Category.objects.all()
 
 class SqlIde(TemplateView):
     template_name = "sql_ide/sql_ide.html"
@@ -19,7 +16,6 @@ class SqlIde(TemplateView):
         form = SqlIdeForm()
         context = {
             "form" : form,
-            "categories":categories,
             "columns": self.columns,
             "rows": self.rows,
             "errors":self.errors,

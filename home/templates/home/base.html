@@ -1,5 +1,4 @@
 {% load static %}
-{% load bootstrap4 %}
 {% load bootstrap_icons %}
 {% load socialaccount %}
 
@@ -21,8 +20,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
-
-
     </head>
 
     <body class="landing-page">
@@ -95,6 +92,7 @@
 
         {% include 'includes/footer.html' %}
         {% block scripts %}{% include 'includes/scripts.html' %}{% endblock %}
+        
         {% if messages %}
             {% for message in messages %}
                 <script>

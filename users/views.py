@@ -7,14 +7,14 @@ import users.models as model
 from lessons.models import Category
 from django.contrib.auth.views import LoginView
 
-categories = Category.objects.all()
+
 
 class UserView(LoginView):
     template_name = 'user/login.html'
-    
+    categories = Category.objects.all()
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({'categories':categories})
+        context.update({'categories':self.categories})
         return context
 
 
@@ -27,7 +27,7 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'user/register.html', {'form': form, 'categories':categories})
+    return render(request, 'user/register.html', {'form': form})
 
 def user_logout(request):
     logout(request)
@@ -39,7 +39,6 @@ def profile(request):
     projects = model.Projects.objects.filter(user_id=request.user.id)
     context = {
         'projects':projects,
-        'categories':categories
     }
     return render(request, 'user/profile.html', context)
 
@@ -48,7 +47,6 @@ def projects(request):
     projects = model.Projects.objects.filter(user_id=request.user.id)
     context = {
         'projects':projects,
-        'categories':categories,
     }
     return render(request, 'user/user_projects.html', context)
 
@@ -56,7 +54,6 @@ def projects(request):
 def html_css_js_projects(request):
     html_css_js_projects = model.HtmlProject.objects.filter(user_id=request.user.id)
     context = {
-        'categories':categories,
         'html_css_js_projects':html_css_js_projects
     }
     return render(request, 'user/html_css_js_projects.html', context)
