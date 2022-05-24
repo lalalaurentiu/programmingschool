@@ -55,7 +55,7 @@
                 {% if lesson.code_python %}
 
 
-                    <div id="{{ lesson.slug }}" style="width: 100%;height: 100%;background-color: rgba(157, 164, 177, 0.5);z-index: 5;position: fixed;top: 0;left: 0;transform: translateX(-100%);">
+                    <div id="{{ lesson.slug }}" style="width: 100%;height: 100%;background-color: rgba(157, 164, 177, 0.9);z-index: 5;position: fixed;top: 0;left: 0;transform: translateX(-100%);">
                         
                         <script>
                             function {{ lesson.slug }}(){
@@ -67,7 +67,7 @@
                                     '<script src="/static/python_interpretor/js/python.js"><\/script>'+
                                     '<script src="/static/python_interpretor/js/editor.js"><\/script>'+
                                     '<script src="/static/python_interpretor/js/plugins.js"><\/script>'+
-                                        
+
                                     `
                                     <div style="margin-top: 100px;">
                                         <textarea id="code">{{ lesson.code_python }}</textarea>
@@ -81,6 +81,7 @@
                                     `
                                 )
                                 $("#{{ lesson.slug }}").css("transform", "translateX(0)")
+                                // nu functioneaza autoclick
                                 $("#skulpt_run").trigger("click")
                             }
                         </script>
