@@ -51,9 +51,7 @@ INSTALLED_APPS = [
     'sql_ide.apps.SqlIdeConfig',
 
     #external apps
-    "bootstrap4",
     'django_bootstrap_icons',
-    'crispy_forms',
     'fontawesome_free',
     'embed_video',
 
