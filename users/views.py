@@ -7,7 +7,9 @@ import users.models as model
 from lessons.models import Category
 from django.contrib.auth.views import LoginView
 from django.views.generic import TemplateView
-
+from lessons.forms import (
+    CategoryAddForm,
+)
 
 
 class UserView(LoginView):
@@ -65,11 +67,28 @@ class AdminCategoryadd(TemplateView):
         if request.user.is_staff:
             template_name = "admin/Category.html"
             category = Category.objects.all()
+            categoryForm = CategoryAddForm()
             context = {
-                "categorys":category
+                "categorys":category,
+                "categoryForm":categoryForm
             }
             response = render(request, template_name, context)
             return response
         else:
             return HttpResponse(status = 401)
+
+    def post(self, request):
+        if request.user.is_staff:
+            categoryForm = CategoryAddForm(request.POST)
+            if request.method == "POST":
+                if categoryForm.is_valid():
+                    categoryForm.save()
+                    return redirect("staff:category")
+            else:
+                categoryForm = CategoryAddForm()
+        else:
+            return HttpResponse(status = 401)
+
+
+        
 

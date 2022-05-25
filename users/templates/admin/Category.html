@@ -1,5 +1,6 @@
 {% extends 'admin/dashboard.html' %}
 {% load static%}
+{% load bootstrap_icons %}
 
 {% block content %}
     
@@ -123,7 +124,22 @@
           </div>
           <!-- Card -->
   
-    {% endfor %}    
+    {% endfor %} 
+
+          <div>
+            <form method="post">
+              {% csrf_token %}
+              {{ categoryForm }}
+              <button type="submit">Save</button>
+            </form>
+          </div>
+          
+    <div style="position: absolute; ;right: 25px;bottom: 50px;">
+      <button type="button" class="btn-primary rounded-pill " mdb-toggle="modal" >
+        {% bs_icon 'plus' %} Category
+      </button>
+    </div> 
+    
     {% if category %}
     
     {% endif %}

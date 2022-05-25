@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from embed_video.fields import EmbedVideoField
+from django.utils.text import slugify
 
 class Category(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -11,6 +12,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self,*args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Category, self).save(*args, **kwargs)
 
 class Lessons(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE, related_name="lessons")
