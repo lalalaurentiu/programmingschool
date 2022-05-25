@@ -40,8 +40,9 @@
                       <tbody>
                           {% for lectii in category.lessons.all %}
                             <tr>
-                                <td>
-                                    <a href="{{ lectii.get_absolute_url }}">Lectia {{ lectii }}</a>
+                                <td class="d-flex justify-content-between">
+                                    <a href="{% url 'staff:lessons' id=lectii.id %}">Lectia {{ lectii }}</a>
+                                    <a href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
                                 </td>
                                 <td>
                                     {% for lectie in lectii.lesson.all %}
@@ -133,8 +134,8 @@
               <button type="submit">Save</button>
             </form>
           </div>
-          
-    <div style="position: absolute; ;right: 25px;bottom: 50px;">
+
+    <div style="position: fixed;right: 25px;bottom: 50px;">
       <button type="button" class="btn-primary rounded-pill " mdb-toggle="modal" >
         {% bs_icon 'plus' %} Category
       </button>

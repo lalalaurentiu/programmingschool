@@ -4,11 +4,15 @@ from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 import users.models as model
-from lessons.models import Category
+from lessons.models import (
+    Category,
+    Lessons
+)
 from django.contrib.auth.views import LoginView
 from django.views.generic import TemplateView
 from lessons.forms import (
     CategoryAddForm,
+    LessonsAddForm
 )
 
 
@@ -89,6 +93,24 @@ class AdminCategoryadd(TemplateView):
         else:
             return HttpResponse(status = 401)
 
+class EditLessons(TemplateView):
+    def get(self,request, id):
+        template = "admin/admineditlessons.html"
+        lessons = Lessons.objects.get(id=id)
+        lessonsForm = LessonsAddForm(instance = lessons)
+        context = {
+            "lessonsForm":lessonsForm
+        }
+        response = render(request, template, context)
+        return response
 
+    def post(self, request, id):
+        lessons = Lessons.objects.get(id=id)
+        lessonsForm = LessonsAddForm(request.POST, instance = lessons)
+        if request.method == "POST":
+            if lessonsForm.is_valid():
+                lessonsForm.save()
+            else:
+                lessonsForm = LessonsAddForm()
         
-
+        return redirect("staff:lessons", id=id)
