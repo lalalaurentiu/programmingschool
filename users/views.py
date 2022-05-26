@@ -72,9 +72,11 @@ class AdminCategoryadd(TemplateView):
             template_name = "admin/Category.html"
             category = Category.objects.all()
             categoryForm = CategoryAddForm()
+            lessonsForm = LessonsAddForm()
             context = {
                 "categorys":category,
-                "categoryForm":categoryForm
+                "categoryForm":categoryForm,
+                "lessonsForm":lessonsForm
             }
             response = render(request, template_name, context)
             return response
@@ -83,8 +85,8 @@ class AdminCategoryadd(TemplateView):
 
     def post(self, request):
         if request.user.is_staff:
-            categoryForm = CategoryAddForm(request.POST)
             if request.method == "POST":
+                categoryForm = CategoryAddForm(request.POST)
                 if categoryForm.is_valid():
                     categoryForm.save()
                     return redirect("staff:category")
@@ -93,24 +95,36 @@ class AdminCategoryadd(TemplateView):
         else:
             return HttpResponse(status = 401)
 
+def addLessons(request, category_id):
+    lessonsForm = LessonsAddForm(request.POST)
+    if request.method == "POST":
+        print(lessonsForm.is_valid())
+        if lessonsForm.is_valid():
+            instance = lessonsForm.save(commit=False)
+            instance.category_id = category_id
+            instance.save()
+        else:
+            lessonsForm = LessonsAddForm()
+    return redirect("staff:category")
+
 class EditLessons(TemplateView):
     def get(self,request, id):
         template = "admin/admineditlessons.html"
         lessons = Lessons.objects.get(id=id)
-        lessonsForm = LessonsAddForm(instance = lessons)
+        updateLessonsForm = LessonsAddForm(instance = lessons)
         context = {
-            "lessonsForm":lessonsForm
+            "updateLessonsForm":updateLessonsForm
         }
         response = render(request, template, context)
         return response
 
     def post(self, request, id):
         lessons = Lessons.objects.get(id=id)
-        lessonsForm = LessonsAddForm(request.POST, instance = lessons)
+        updateLessonsForm = LessonsAddForm(request.POST, instance = lessons)
         if request.method == "POST":
-            if lessonsForm.is_valid():
-                lessonsForm.save()
+            if updateLessonsForm.is_valid():
+                updateLessonsForm.save()
             else:
-                lessonsForm = LessonsAddForm()
+                updateLessonsForm = LessonsAddForm()
         
-        return redirect("staff:lessons", id=id)
+        return redirect("staff:addlessons", id=id)

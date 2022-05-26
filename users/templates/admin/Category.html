@@ -41,7 +41,7 @@
                           {% for lectii in category.lessons.all %}
                             <tr>
                                 <td class="d-flex justify-content-between">
-                                    <a href="{% url 'staff:lessons' id=lectii.id %}">Lectia {{ lectii }}</a>
+                                    <a href="{% url 'staff:editlessons' id=lectii.id %}">Lectia {{ lectii }}</a>
                                     <a href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
                                 </td>
                                 <td>
@@ -124,7 +124,11 @@
   
           </div>
           <!-- Card -->
-  
+          <form action="{% url 'staff:addlessons' category_id=category.id %}" method="post">
+            {% csrf_token %}
+            {{ lessonsForm.as_p }}
+            <button type="submit">Save</button>
+          </form>
     {% endfor %} 
 
           <div>
