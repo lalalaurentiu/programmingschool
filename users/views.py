@@ -95,36 +95,58 @@ class AdminCategoryadd(TemplateView):
         else:
             return HttpResponse(status = 401)
 
+def deleteCategory(request, id):
+    if request.user.is_staff:
+        category = Category.objects.get(id=id)
+        categoryForm = CategoryAddForm(request.POST)
+        if request.method == "POST":
+            categoryForm.fields.pop("title")
+            if categoryForm.is_valid():
+                category.delete()
+            else:
+                print(categoryForm.errors)
+        return redirect("staff:category")
+    else:
+        return HttpResponse(status = 401)
+
 def addLessons(request, category_id):
-    lessonsForm = LessonsAddForm(request.POST)
-    if request.method == "POST":
-        print(lessonsForm.is_valid())
-        if lessonsForm.is_valid():
-            instance = lessonsForm.save(commit=False)
-            instance.category_id = category_id
-            instance.save()
-        else:
-            lessonsForm = LessonsAddForm()
-    return redirect("staff:category")
+    if request.user.is_staff:
+        lessonsForm = LessonsAddForm(request.POST)
+        if request.method == "POST":
+            if lessonsForm.is_valid():
+                instance = lessonsForm.save(commit=False)
+                instance.category_id = category_id
+                instance.save()
+            else:
+                lessonsForm = LessonsAddForm()
+        return redirect("staff:category")
+    else:
+        return HttpResponse(status = 401)
 
 class EditLessons(TemplateView):
     def get(self,request, id):
-        template = "admin/admineditlessons.html"
-        lessons = Lessons.objects.get(id=id)
-        updateLessonsForm = LessonsAddForm(instance = lessons)
-        context = {
-            "updateLessonsForm":updateLessonsForm
-        }
-        response = render(request, template, context)
-        return response
+        if request.user.is_staff:
+            template = "admin/admineditlessons.html"
+            lessons = Lessons.objects.get(id=id)
+            updateLessonsForm = LessonsAddForm(instance = lessons)
+            context = {
+                "updateLessonsForm":updateLessonsForm
+            }
+            response = render(request, template, context)
+            return response
+        else:
+            return HttpResponse(status = 401)
 
     def post(self, request, id):
-        lessons = Lessons.objects.get(id=id)
-        updateLessonsForm = LessonsAddForm(request.POST, instance = lessons)
-        if request.method == "POST":
-            if updateLessonsForm.is_valid():
-                updateLessonsForm.save()
-            else:
-                updateLessonsForm = LessonsAddForm()
-        
-        return redirect("staff:addlessons", id=id)
+        if request.user.is_staff:
+            lessons = Lessons.objects.get(id=id)
+            updateLessonsForm = LessonsAddForm(request.POST, instance = lessons)
+            if request.method == "POST":
+                if updateLessonsForm.is_valid():
+                    updateLessonsForm.save()
+                else:
+                    updateLessonsForm = LessonsAddForm()
+            
+            return redirect("staff:addlessons", id=id)
+        else:
+            return HttpResponse(status = 401)

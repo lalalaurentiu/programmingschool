@@ -111,7 +111,10 @@
                       </ul>
                     </nav>
                     <!-- Pagination -->
-  
+                    <form action="{% url 'staff:deleteCategory' id=category.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit">Delete</button>
+                    </form>
                   </div>
                   <!-- Bottom Table UI -->
   
