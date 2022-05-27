@@ -12,7 +12,8 @@ from django.contrib.auth.views import LoginView
 from django.views.generic import TemplateView
 from lessons.forms import (
     CategoryAddForm,
-    LessonsAddForm
+    LessonsAddForm,
+    LessonForm
 )
 
 
@@ -73,10 +74,12 @@ class AdminCategoryadd(TemplateView):
             category = Category.objects.all()
             categoryForm = CategoryAddForm()
             lessonsForm = LessonsAddForm()
+            lessonForm = LessonForm()
             context = {
                 "categorys":category,
                 "categoryForm":categoryForm,
-                "lessonsForm":lessonsForm
+                "lessonsForm":lessonsForm,
+                "lessonForm":lessonForm
             }
             response = render(request, template_name, context)
             return response
@@ -157,6 +160,18 @@ def deleteLessons(request, id):
             lessonsForm.fields.clear()
             if lessonsForm.is_valid():
                 lessons.delete()
+        return redirect("staff:category")
+    else:
+        return HttpResponse(status = 401)
+
+def addLesson(request, lessons_id):
+    if request.user.is_staff:
+        lessonForm = LessonForm(request.POST)
+        if request.method == "POST":
+            if lessonForm.is_valid():
+                instance = lessonForm.save(commit=False)
+                instance.category_id = lessons_id
+                instance.save()
         return redirect("staff:category")
     else:
         return HttpResponse(status = 401)

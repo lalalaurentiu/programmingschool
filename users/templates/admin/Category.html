@@ -52,11 +52,16 @@
                                 </td>
                                 <td>
                                     {% for lectie in lectii.lesson.all %}
-                                    <div >
-                                        <span class="mr-1">ID numarul {{lectie.id}} content <b>{{lectie}}</b></span> 
-                                    </div>
-                                        
+                                     
+                                        <div>
+                                            <span class="mr-1">ID numarul {{lectie.id}} content <b>{{lectie}}</b></span> 
+                                        </div>
                                     {% endfor %}
+                                    <form action="{% url 'staff:addlesson' lessons_id=lectii.id %}" method="post">
+                                      {% csrf_token %}
+                                      {{ lessonForm.as_p }}
+                                      <button type="submit">Save</button>
+                                    </form>
                                 </td>
                                 <td>
                                     {% for exercitiu in lectii.exercise.all %}
