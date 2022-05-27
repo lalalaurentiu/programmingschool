@@ -6,7 +6,8 @@ from .views import(
     addLessons,
     deleteLessons,
     addLesson,
-    EditLesson
+    EditLesson,
+    deleteLesson
 ) 
 
 app_name = 'staff'
@@ -19,4 +20,5 @@ urlpatterns = [
     path("delete_lessons/<int:id>", deleteLessons, name="deletelessons"),
     path("add_lesson/<int:lessons_id>", addLesson, name="addlesson"),
     path("edit_lesson/<int:id>", EditLesson.as_view(), name="editlesson"),
+    path("delete_lesson/<int:id>", deleteLesson, name="deletelesson"),
 ]

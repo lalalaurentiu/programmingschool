@@ -207,3 +207,15 @@ class EditLesson(TemplateView):
         else:
             return HttpResponse(status = 401)
 
+def deleteLesson(request, id):
+    if request.user.is_staff:
+        lesson = Lesson.objects.get(id=id)
+        lessonForm = LessonForm(request.POST)
+        if request.method == "POST":
+            lessonForm.fields.clear()
+            if lessonForm.is_valid():
+                lesson.delete()
+        return redirect("staff:category")
+    else:
+        return HttpResponse(status = 401)
+

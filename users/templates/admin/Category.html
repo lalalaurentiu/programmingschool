@@ -53,8 +53,12 @@
                                 <td>
                                     {% for lectie in lectii.lesson.all %}
                                      
-                                        <div>
+                                        <div class="d-flex justify-content-between">
                                             <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul {{lectie.id}} content <b>{{lectie}}</b></a> 
+                                            <form action="{% url 'staff:deletelesson' id=lectie.id %}" method="post">
+                                              {% csrf_token %}
+                                              <button type="submit">{% bs_icon 'trash3' %}</button>
+                                            </form>
                                         </div>
                                     {% endfor %}
                                     <form action="{% url 'staff:addlesson' lessons_id=lectii.id %}" method="post">
