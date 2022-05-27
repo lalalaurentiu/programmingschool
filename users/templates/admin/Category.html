@@ -54,7 +54,7 @@
                                     {% for lectie in lectii.lesson.all %}
                                      
                                         <div>
-                                            <span class="mr-1">ID numarul {{lectie.id}} content <b>{{lectie}}</b></span> 
+                                            <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul {{lectie.id}} content <b>{{lectie}}</b></a> 
                                         </div>
                                     {% endfor %}
                                     <form action="{% url 'staff:addlesson' lessons_id=lectii.id %}" method="post">

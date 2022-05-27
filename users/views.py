@@ -6,7 +6,8 @@ from django.contrib.auth import logout
 import users.models as model
 from lessons.models import (
     Category,
-    Lessons
+    Lessons,
+    Lesson
 )
 from django.contrib.auth.views import LoginView
 from django.views.generic import TemplateView
@@ -120,6 +121,8 @@ def addLessons(request, category_id):
                 instance = lessonsForm.save(commit=False)
                 instance.category_id = category_id
                 instance.save()
+            else:
+                lessonsForm = LessonsAddForm()
         return redirect("staff:category")
     else:
         return HttpResponse(status = 401)
@@ -147,7 +150,6 @@ class EditLessons(TemplateView):
                     updateLessonsForm.save()
                 else:
                     updateLessonsForm = LessonsAddForm()
-            
             return redirect("staff:addlessons", id=id)
         else:
             return HttpResponse(status = 401)
@@ -172,6 +174,36 @@ def addLesson(request, lessons_id):
                 instance = lessonForm.save(commit=False)
                 instance.category_id = lessons_id
                 instance.save()
+            else:
+                lessonForm = LessonForm()
         return redirect("staff:category")
     else:
         return HttpResponse(status = 401)
+
+class EditLesson(TemplateView):
+    def get(self,request, id):
+        if request.user.is_staff:
+            template = "admin/admineditlesson.html"
+            lesson = Lesson.objects.get(id=id)
+            updateLessonForm = LessonForm(instance = lesson)
+            context = {
+                "updateLessonForm":updateLessonForm
+            }
+            response = render(request, template, context)
+            return response
+        else:
+            return HttpResponse(status = 401)
+
+    def post(self, request, id):
+        if request.user.is_staff:
+            lessons = Lesson.objects.get(id=id)
+            updateLessonForm = LessonForm(request.POST, instance = lessons)
+            if request.method == "POST":
+                if updateLessonForm.is_valid():
+                    updateLessonForm.save()
+                else:
+                    updateLessonForm = LessonForm()
+            return redirect("staff:editlesson", id=id)
+        else:
+            return HttpResponse(status = 401)
+
