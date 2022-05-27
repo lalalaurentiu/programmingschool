@@ -117,8 +117,6 @@ def addLessons(request, category_id):
                 instance = lessonsForm.save(commit=False)
                 instance.category_id = category_id
                 instance.save()
-            else:
-                lessonsForm = LessonsAddForm()
         return redirect("staff:category")
     else:
         return HttpResponse(status = 401)
@@ -150,3 +148,15 @@ class EditLessons(TemplateView):
             return redirect("staff:addlessons", id=id)
         else:
             return HttpResponse(status = 401)
+
+def deleteLessons(request, id):
+    if request.user.is_staff:
+        lessons = Lessons.objects.get(id=id)
+        lessonsForm = LessonsAddForm(request.POST)
+        if request.method == "POST":
+            lessonsForm.fields.clear()
+            if lessonsForm.is_valid():
+                lessons.delete()
+        return redirect("staff:category")
+    else:
+        return HttpResponse(status = 401)

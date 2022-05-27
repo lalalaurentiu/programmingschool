@@ -42,7 +42,13 @@
                             <tr>
                                 <td class="d-flex justify-content-between">
                                     <a href="{% url 'staff:editlessons' id=lectii.id %}">Lectia {{ lectii }}</a>
-                                    <a href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
+                                    <div class="d-flex">
+                                      <a href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
+                                      <form action="{% url 'staff:deletelessons' id=lectii.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit">{% bs_icon 'trash3' %}</button>
+                                      </form>
+                                    </div>
                                 </td>
                                 <td>
                                     {% for lectie in lectii.lesson.all %}
