@@ -92,15 +92,73 @@
                                             <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul {{lectie.id}} content <b>{{lectie}}</b></a> 
                                             <form action="{% url 'staff:deletelesson' id=lectie.id %}" method="post">
                                               {% csrf_token %}
-                                              <button type="submit">{% bs_icon 'trash' %}</button>
+                                              <a type="submit">{% bs_icon 'trash' %}</a>
                                             </form>
                                         </div>
                                     {% endfor %}
-                                    <form action="{% url 'staff:addlesson' lessons_id=lectii.id %}" method="post">
-                                      {% csrf_token %}
-                                      {{ lessonForm.as_p }}
-                                      <button type="submit">Save</button>
-                                    </form>
+                                    <!-- Lesson form -->
+                                    <div class="modal fade" id="modalLesson{{ lectii }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg modal-notify modal-primary" role="document">
+                                        <!-- Content -->
+                                        <div class="modal-content">
+                                          <!-- Header -->
+                                          <div class="modal-header">
+                                            <p class="heading lead">Adaugare Content</p>
+                            
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true" class="white-text">×</span>
+                                            </button>
+                                          </div>
+                            
+                                          <!-- Body -->
+                                          <form action="{% url 'staff:addlesson' lessons_id=lectii.id %}" method="post">
+                                          <div class="modal-body">
+                                            <div class="text-center">
+                                              {% csrf_token %}
+                                              <div class="md-form">
+                                                <label for="id_title">Titlu</label>
+                                                {{ lessonForm.title }}
+                                              </div>
+                                              <div class="md-form">
+                                                <label for="id_content">Content</label>
+                                                {{ lessonForm.content }}
+                                              </div>
+                                              <div class="md-form">
+                                                <label for="id_code_python">Cod Python</label>
+                                                {{ lessonForm.code_python }}
+                                              </div>
+                                              <div class="md-form">
+                                                <label for="id_code_html">Cod HTML</label>
+                                                {{ lessonForm.code_html }}
+                                              </div>
+                                              <div class="md-form">
+                                                <label for="id_code_css">Cod CSS</label>
+                                                {{ lessonForm.code_css }}
+                                              </div>
+                                              <div class="md-form">
+                                                <label for="id_code_js">Cod JavaScript</label>
+                                                {{ lessonForm.code_js }}
+                                              </div>
+                                              <div class="md-form">
+                                                <label for="id_code_link">Linkul Codului</label>
+                                                {{ lessonForm.code_link }}
+                                              </div>
+                                              <div class="md-form">
+                                                <label for="id_video">Linkul Videoclipului</label>
+                                                {{ lessonForm.code_link }}
+                                              </div>
+                                              </div>
+                                            </div>
+                                            <!-- Footer -->
+                                            <div class="modal-footer">
+                                              <button type="submit" class="btn btn-outline-primary rounded-pill">Save</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                      </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary rounded-pill py-1" data-toggle="modal" data-target="#modalLesson{{ lectii }}" data-backdrop="false">{% bs_icon 'plus' %} Content</button>
                                 </td>
                                 <td>
                                     {% for exercitiu in lectii.exercise.all %}
@@ -163,7 +221,7 @@
                     <!-- Pagination -->
                     <div class="row my-4">
                       <div class="mr-1">
-                        <a class="btn btn-outline-primary rounded-pill py-2" data-toggle="modal" data-target="#modalLessonsForm" data-backdrop="false">{% bs_icon 'plus' %} Category</a>
+                        <a class="btn btn-outline-primary rounded-pill py-2" data-toggle="modal" data-target="#modalLessonsForm" data-backdrop="false">{% bs_icon 'plus' %} Lectie</a>
                       </div>
                       
                       <form action="{% url 'staff:deleteCategory' id=category.id %}" method="post">
