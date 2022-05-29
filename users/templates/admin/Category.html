@@ -3,40 +3,41 @@
 {% load bootstrap_icons %}
 
 {% block content %}
-<div class="modal fade right modal-scrolling" id="modalCategoryForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" style="display: none;" aria-hidden="true">
-  <div class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
-    <!-- Content -->
-    <div class="modal-content">
-      <!-- Header -->
-      <div class="modal-header">
-        <p class="heading lead">Adaugare Categorie</p>
+  <!-- Category Form -->
+  <div class="modal fade right modal-scrolling" id="modalCategoryForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
+      <!-- Content -->
+      <div class="modal-content">
+        <!-- Header -->
+        <div class="modal-header">
+          <p class="heading lead">Adaugare Categorie</p>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">×</span>
-        </button>
-      </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-text">×</span>
+          </button>
+        </div>
 
-      <!-- Body -->
-      <form method="post">
-        <div class="modal-body">
-          <div class="text-center">
-              {% csrf_token %}
-              <div class="md-form ml-5 mr-5">
-                <label for="id_title">Titlu</label>
-                {{ categoryForm.title }}
-              </div>
+        <!-- Body -->
+        <form method="post">
+          <div class="modal-body">
+            <div class="text-center">
+                {% csrf_token %}
+                <div class="md-form ml-5 mr-5">
+                  <label for="id_title">Titlu</label>
+                  {{ categoryForm.title }}
+                </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer justify-content-center">
+            <button type="submit" class="btn btn-outline-primary rounded-pill">Save</button>
           </div>
         </div>
-
-        <!-- Footer -->
-        <div class="modal-footer justify-content-center">
-          <button type="submit" class="btn btn-outline-primary rounded-pill">Save</button>
-        </div>
-      </div>
-    </form>
-    <!-- Content -->
+      </form>
+      <!-- Content -->
+    </div>
   </div>
-</div>
 
     {% for category in categorys %}
         <!-- Card -->
@@ -77,10 +78,10 @@
                                 <td class="d-flex justify-content-between">
                                     <a href="{% url 'staff:editlessons' id=lectii.id %}">Lectia {{ lectii }}</a>
                                     <div class="d-flex">
-                                      <a href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
+                                      <a class="mr-2" href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
                                       <form action="{% url 'staff:deletelessons' id=lectii.id %}" method="post">
                                         {% csrf_token %}
-                                        <button type="submit">{% bs_icon 'trash3' %}</button>
+                                        <a type="submit">{% bs_icon 'trash' %}</a>
                                       </form>
                                     </div>
                                 </td>
@@ -91,7 +92,7 @@
                                             <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul {{lectie.id}} content <b>{{lectie}}</b></a> 
                                             <form action="{% url 'staff:deletelesson' id=lectie.id %}" method="post">
                                               {% csrf_token %}
-                                              <button type="submit">{% bs_icon 'trash3' %}</button>
+                                              <button type="submit">{% bs_icon 'trash' %}</button>
                                             </form>
                                         </div>
                                     {% endfor %}
@@ -160,10 +161,18 @@
                       </ul>
                     </nav>
                     <!-- Pagination -->
-                    <form action="{% url 'staff:deleteCategory' id=category.id %}" method="post">
-                      {% csrf_token %}
-                      <button type="submit">Delete</button>
-                    </form>
+                    <div class="row my-4">
+                      <div class="mr-1">
+                        <a class="btn btn-outline-primary rounded-pill py-2" data-toggle="modal" data-target="#modalLessonsForm" data-backdrop="false">{% bs_icon 'plus' %} Category</a>
+                      </div>
+                      
+                      <form action="{% url 'staff:deleteCategory' id=category.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger rounded-pill py-2">Delete</button>
+                      </form>
+                    </div>
+                      
+                    
                   </div>
                   <!-- Bottom Table UI -->
   
@@ -176,11 +185,45 @@
   
           </div>
           <!-- Card -->
-          <form action="{% url 'staff:addlessons' category_id=category.id %}" method="post">
-            {% csrf_token %}
-            {{ lessonsForm.as_p }}
-            <button type="submit">Save</button>
-          </form>
+          <!-- Lessons Form -->
+          <div class="modal fade right modal-scrolling" id="modalLessonsForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
+              <!-- Content -->
+              <div class="modal-content">
+                <!-- Header -->
+                <div class="modal-header">
+                  <p class="heading lead">Adaugare Lectie</p>
+        
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">×</span>
+                  </button>
+                </div>
+        
+                <!-- Body -->
+                <form action="{% url 'staff:addlessons' category_id=category.id %}" method="post">
+                  <div class="modal-body">
+                    <div class="text-center">
+                        {% csrf_token %}
+                        <div class="md-form ml-5 mr-5">
+                          <label for="id_title">Titlu</label>
+                          {{ lessonsForm.title }}
+                        </div>
+                        <div class="md-form ml-5 mr-5">
+                          <label for="id_content">Content</label>
+                          {{ lessonsForm.content }}
+                        </div>
+                    </div>
+                  </div>
+        
+                  <!-- Footer -->
+                  <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-outline-primary rounded-pill py-1">Save</button>
+                  </div>
+                </div>
+              </form>
+              <!-- Content -->
+            </div>
+          </div>
     {% endfor %} 
  
     <div style="position: fixed;right: 25px;bottom: 50px;">
