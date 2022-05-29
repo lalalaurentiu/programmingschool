@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 from lessons.models import Lessons
 from django.urls import reverse
+from django.utils.text import slugify
 
 class Exercise(models.Model):
     category = models.ForeignKey(Lessons, null=True, on_delete=CASCADE, related_name="exercise")
@@ -16,3 +17,7 @@ class Exercise(models.Model):
 
     def get_absolute_url(self):
         return reverse('python_exercise:exercise', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Exercise,self).save(*args, **kwargs)

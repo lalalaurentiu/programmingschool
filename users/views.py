@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
+
+from python_exercise.models import Exercise
 from .forms import UserRegisterForm 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -16,6 +18,7 @@ from lessons.forms import (
     LessonsAddForm,
     LessonForm
 )
+from python_exercise.forms import ExerciseForm
 
 
 class UserView(LoginView):
@@ -76,11 +79,13 @@ class AdminCategoryadd(TemplateView):
             categoryForm = CategoryAddForm()
             lessonsForm = LessonsAddForm()
             lessonForm = LessonForm()
+            exerciseForm = ExerciseForm()
             context = {
                 "categorys":category,
                 "categoryForm":categoryForm,
                 "lessonsForm":lessonsForm,
-                "lessonForm":lessonForm
+                "lessonForm":lessonForm,
+                "exerciseForm":exerciseForm
             }
             response = render(request, template_name, context)
             return response
@@ -218,4 +223,55 @@ def deleteLesson(request, id):
         return redirect("staff:category")
     else:
         return HttpResponse(status = 401)
+
+def addExercise(request, lessons_id):
+    if request.user.is_staff:
+        exerciseForm = ExerciseForm(request.POST)
+        if request.method == "POST":
+            if exerciseForm.is_valid():
+                instance = exerciseForm.save(commit=False)
+                instance.category_id = lessons_id
+                instance.save()
+            else:
+                exerciseForm = LessonForm()
+        return redirect("staff:category")
+    else:
+        return HttpResponse(status = 401)
+
+class EditExercise(TemplateView):
+    def get(self,request, id):
+        if request.user.is_staff:
+            template = "admin/admineditexercise.html"
+            exercise = Exercise.objects.get(id=id)
+            updateExerciseForm = ExerciseForm(instance = exercise)
+            context = {
+                "updateExerciseForm":updateExerciseForm
+            }
+            response = render(request, template, context)
+            return response
+        else:
+            return HttpResponse(status = 401)
+
+    def post(self, request, id):
+        if request.user.is_staff:
+            exercise = Exercise.objects.get(id=id)
+            updateExerciseForm = ExerciseForm(request.POST, instance = exercise)
+            if request.method == "POST":
+                if updateExerciseForm.is_valid():
+                    updateExerciseForm.save()
+                else:
+                    updateExerciseForm = ExerciseForm()
+            return redirect("staff:editexercise", id=id)
+        else:
+            return HttpResponse(status = 401)
+
+def deleteExercise(request, id):
+    if request.user.is_staff:
+        exercise = Exercise.objects.get(id=id)
+        exerciseForm = ExerciseForm(request.POST)
+        if request.method == "POST":
+            exerciseForm.fields.clear()
+            if exerciseForm.is_valid():
+                exercise.delete()
+        return redirect("staff:category")
 

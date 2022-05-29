@@ -54,6 +54,8 @@ class Lesson(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        if self.code_python:
+            self.code_link = self.category.slug
         super(Lesson,self).save(*args, **kwargs)
 
 
