@@ -1,4 +1,5 @@
 {% extends 'home/base.html' %}
+{% load bootstrap_icons %}
 {% load static %}
 
 {% block head %}
@@ -31,16 +32,28 @@
             </ul>
         </nav>
         <div class="mt-5 ml-1">
-            <div class='row pt-5'>
+            <div class='row mt-5'>
                 {% for lesson in lessons %}
-                    <div class="col p-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">{{ lesson.title }}</h4>
+                    <div class="col-lg-4 col-md-6 mb-4 d-flex justify-content-center">
+                        <div class="card card-cascade card-transparent" >
+                            <div class="view view-cascade gradient-card-header heavy-rain-gradient">
+                                <h4 class="card-header-title black-text">{{ lesson.title }}</h4>
+                            </div>
+                            <div class="card-body card-body-cascade ext-center" style="max-height: 480px;overflow-y: auto;">
                                 {% autoescape off %}
                                     {{ lesson.content }}
                                 {% endautoescape %}
-                                <a class="btn btn-primary" type="button" href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a>
+                                
+                            </div>
+                            <div class="card-body card-body-cascade">
+                                <a class="blue-text mt-1 d-flex flex-row-reverse bottom-0" href="{{ lesson.get_absolute_url }}">
+                                    <h5 class="waves-effect">{{ lesson.title }} 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                            <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </h5>
+                                </a>
                             </div>
                         </div>
                     </div>

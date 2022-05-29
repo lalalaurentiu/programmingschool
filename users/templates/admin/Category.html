@@ -81,7 +81,7 @@
                                       <a class="mr-2" href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
                                       <form action="{% url 'staff:deletelessons' id=lectii.id %}" method="post">
                                         {% csrf_token %}
-                                        <a type="submit">{% bs_icon 'trash' %}</a>
+                                        <button type="submit" style="border:none;background-color: inherit;">{% bs_icon 'trash' %}</button>
                                       </form>
                                     </div>
                                 </td>
@@ -92,7 +92,7 @@
                                             <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul {{lectie.id}} content <b>{{lectie}}</b></a> 
                                             <form action="{% url 'staff:deletelesson' id=lectie.id %}" method="post">
                                               {% csrf_token %}
-                                              <a type="submit">{% bs_icon 'trash' %}</a>
+                                              <button type="submit" style="border:none;background-color: inherit;">{% bs_icon 'trash' %}</button>
                                             </form>
                                         </div>
                                     {% endfor %}

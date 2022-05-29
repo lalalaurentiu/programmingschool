@@ -150,7 +150,7 @@ class EditLessons(TemplateView):
                     updateLessonsForm.save()
                 else:
                     updateLessonsForm = LessonsAddForm()
-            return redirect("staff:addlessons", id=id)
+            return redirect("staff:editlessons", id=id)
         else:
             return HttpResponse(status = 401)
 
