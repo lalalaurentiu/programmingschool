@@ -3,7 +3,41 @@
 {% load bootstrap_icons %}
 
 {% block content %}
-    
+<div class="modal fade right modal-scrolling" id="modalCategoryForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
+    <!-- Content -->
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <p class="heading lead">Adaugare Categorie</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <form method="post">
+        <div class="modal-body">
+          <div class="text-center">
+              {% csrf_token %}
+              <div class="md-form ml-5 mr-5">
+                <label for="id_title">Titlu</label>
+                {{ categoryForm.title }}
+              </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer justify-content-center">
+          <button type="submit" class="btn btn-outline-primary rounded-pill">Save</button>
+        </div>
+      </div>
+    </form>
+    <!-- Content -->
+  </div>
+</div>
+
     {% for category in categorys %}
         <!-- Card -->
         <div class="card card-cascade narrower">
@@ -148,19 +182,9 @@
             <button type="submit">Save</button>
           </form>
     {% endfor %} 
-
-          <div>
-            <form method="post">
-              {% csrf_token %}
-              {{ categoryForm }}
-              <button type="submit">Save</button>
-            </form>
-          </div>
-
+ 
     <div style="position: fixed;right: 25px;bottom: 50px;">
-      <button type="button" class="btn-primary rounded-pill " mdb-toggle="modal" >
-        {% bs_icon 'plus' %} Category
-      </button>
+      <a class="btn btn-primary rounded-pill" data-toggle="modal" data-target="#modalCategoryForm" data-backdrop="false">{% bs_icon 'plus' %} Category</a> 
     </div> 
     
     {% if category %}

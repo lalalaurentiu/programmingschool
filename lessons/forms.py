@@ -9,6 +9,11 @@ class CategoryAddForm(forms.ModelForm):
     class Meta:
         model = Category
         exclude = ("slug",)
+        widgets = {
+            "title":forms.TextInput(attrs={
+                "class":"form-control"
+            })
+        }
 
 class LessonsAddForm(forms.ModelForm):
     class Meta:
