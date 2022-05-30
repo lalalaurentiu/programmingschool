@@ -3,9 +3,67 @@
 {% load bootstrap_icons %}
 
 {% block content%}
-    <form method="post" >
-        {% csrf_token %}
-        {{ updateLessonsForm.as_p }}
-        <button type="submit">Update</button>
-    </form>
+    <div class="container-fluid border p-5 bg-white">
+        <form method="post" >
+          {% csrf_token %}
+          <div class="md-form ml-5 mr-5">
+              <label for="id_title">Titlu</label>
+              {{ updateLessonsForm.title }}
+            </div>
+            <div class="md-form ml-5 mr-5">
+              <label for="id_content">Content</label>
+              {{ updateLessonsForm.content }}
+            </div>
+          <button type="submit"  class="btn btn-outline-primary rounded-pill">Update</button>
+        </form>
+    </div>
+    <h2 class="mt-3">Preview Card Lessons</h2>
+    <div class="d-flex border bg-white">
+      <div class="mt-2 ml-1 w-100">
+          <div class='row mt-5 justify-content-center'>
+                  
+                  <div class="col-10 col-lg-4 col-ms-6 mb-4">
+                      <div class="card card-cascade card-transparent m-1" style="width: 100%;">
+                          <div class="view view-cascade gradient-card-header heavy-rain-gradient">
+                              <h4 id="title" class="card-header-title black-text"></h4>
+                          </div>
+                          <div id="content" class="card-body card-body-cascade ext-center" style="max-height: 240px;overflow-y: auto;">
+                             
+                          </div>
+                          <div class="card-body card-body-cascade">
+                              <a class="blue-text mt-1 d-flex flex-row-reverse bottom-0" href="#">
+                                  <h5 id="button" class="waves-effect">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                          <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                          <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                      </svg>
+                                  </h5>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+          </div>
+      </div>
+  </div>
+  <script>
+    $(document).ready( function (){
+      $("#title").html($("#id_title").val())
+      $("#content").html($("#id_content").val())
+      $("#button").html(
+        $("#id_title").val() +
+        `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+            <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+        `
+        )
+    })
+    $("#id_title").on("keyup", function (){
+      $("#title").html($("#id_title").val())
+    });
+    $("#id_content").on("keyup", function (){
+      $("#content").html($("#id_content").val())
+    });
+  </script>
 {% endblock %}

@@ -3,9 +3,41 @@
 {% load bootstrap_icons %}
 
 {% block content%}
-    <form method="post" >
-        {% csrf_token %}
-        {{ updateLessonForm.as_p }}
-        <button type="submit">Update</button>
-    </form>
+    <div class="container-fluid border p-5 bg-white">
+        <form method="post" >
+            {% csrf_token %}
+            <div class="md-form">
+                <label for="id_title">Titlu</label>
+                {{ updateLessonForm.title }}
+            </div>
+            <div class="md-form">
+                <label for="id_content">Content</label>
+                {{ updateLessonForm.content }}
+            </div>
+            <div class="md-form">
+                <label for="id_code_python">Cod Python</label>
+                {{ updateLessonForm.code_python }}
+            </div>
+            <div class="md-form">
+                <label for="id_code_html">Cod HTML</label>
+                {{ updateLessonForm.code_html }}
+            </div>
+            <div class="md-form">
+                <label for="id_code_css">Cod CSS</label>
+                {{ updateLessonForm.code_css }}
+            </div>
+            <div class="md-form">
+                <label for="id_code_js">Cod JavaScript</label>
+                {{ updateLessonForm.code_js }}
+            </div>
+            <div class="md-form">
+                <label for="id_video">Linkul Videoclipului</label>
+                {{ updateLessonForm.code_link }}
+            </div>
+            <button type="submit"  class="btn btn-outline-primary rounded-pill">Update</button>
+        </form>
+    </div>
+    <div class="container-fluid mt-5">
+        Ceva
+    </div>
 {% endblock %}

@@ -51,8 +51,8 @@
       </div>
 
       <!-- Breadcrumb -->
-      <div class="breadcrumb-dn mr-auto">
-        <p>Bun venit {{ request.user.username }}</p>
+      <div class="breadcrumb-dn mr-auto ml-2">
+        <a href="{% url 'staff:category' %}">Bun venit {{ request.user.username }}</a>
       </div>
 
     </nav>

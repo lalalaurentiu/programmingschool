@@ -63,6 +63,11 @@
                                 {% endfor %}
                             </div>
                         </li>
+                        {% if user.is_staff %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'staff:category' %}">Dashboard <span class="sr-only">(current)</span></a>
+                            </li>
+                        {% endif %}
                         {% block exercise %}{% endblock %}
                     </ul>
                     <ul class="navbar-nav text-black">
