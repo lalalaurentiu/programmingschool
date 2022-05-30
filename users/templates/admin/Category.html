@@ -31,7 +31,7 @@
 
           <!-- Footer -->
           <div class="modal-footer justify-content-center">
-            <button type="submit" class="btn btn-outline-primary rounded-pill">Save</button>
+            <button type="submit" class="btn-sm btn-outline-primary rounded-pill px-2 py-0">Save</button>
           </div>
         </div>
       </form>
@@ -81,21 +81,23 @@
                                       <a class="mr-2 ml-2" href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
                                       <form action="{% url 'staff:deletelessons' id=lectii.id %}" method="post">
                                         {% csrf_token %}
-                                        <button type="submit" style="border:none;background-color: inherit;">{% bs_icon 'trash' %}</button>
+                                        <button class="text-black" type="submit" style="border:none;background-color: inherit;">{% bs_icon 'trash' %}</button>
                                       </form>
                                     </div>
                                 </td>
                                 <td>
+                                  <div style="max-height:400px ;overflow-y:auto ;">
                                     {% for lectie in lectii.lesson.all %}
-                                     
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex justify-content-between" >
                                             <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul {{lectie.id}} content <b>{{lectie}}</b></a> 
                                             <form action="{% url 'staff:deletelesson' id=lectie.id %}" method="post">
                                               {% csrf_token %}
-                                              <button type="submit" style="border:none;background-color: inherit;">{% bs_icon 'trash' %}</button>
+                                              <button class="text-black" type="submit" style="border:none;background-color: inherit;">{% bs_icon 'trash' %}</button>
                                             </form>
                                         </div>
                                     {% endfor %}
+                                  </div>
+                                    
                                     <!-- Lesson form -->
                                     <div class="modal fade" id="modalLesson{{ lectii.slug }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                                       <div class="modal-dialog modal-lg modal-notify modal-primary" role="document">
@@ -147,15 +149,16 @@
                                             </div>
                                             <!-- Footer -->
                                             <div class="modal-footer">
-                                              <button type="submit" class="btn btn-outline-primary rounded-pill">Save</button>
+                                              <button type="submit" class="btn btn-outline-primary rounded-pill px-2 py-0">Save</button>
                                             </div>
                                           </div>
                                         </div>
                                       </form>
                                     </div>
-                                    <button type="button" class="btn btn-outline-primary rounded-pill py-1" data-toggle="modal" data-target="#modalLesson{{ lectii.slug }}" data-backdrop="false">{% bs_icon 'plus' %} Content</button>
+                                    <button type="button" class="btn-sm btn-outline-primary rounded-pill px-2 py-0" data-toggle="modal" data-target="#modalLesson{{ lectii.slug }}" data-backdrop="false">{% bs_icon 'plus' %} Content</button>
                                 </td>
                                 <td>
+                                  <div style="max-height:400px ;overflow-y:auto ;">
                                     {% for exercitiu in lectii.exercise.all %}
                                     <div class="d-flex justify-content-between">
                                       <a href="{% url 'staff:editexercise' id=exercitiu.id %}">{{exercitiu.title}}</a> 
@@ -163,11 +166,12 @@
                                         <a class="mr-2 ml-2" href="{{ exercitiu.get_absolute_url }}">{% bs_icon 'eye' %}</a> 
                                         <form action="{% url 'staff:deleteexercise' id=exercitiu.id %}" method="post">
                                           {% csrf_token %}
-                                          <button type="submit" style="border:none;background-color: inherit;">{% bs_icon 'trash' %}</button>
+                                          <button class="text-black" type="submit" style="border:none;background-color: inherit;">{% bs_icon 'trash' %}</button>
                                         </form>
                                       </div>
                                     </div>
                                     {% endfor %}
+                                  </div>
                                     <!-- Exercise form -->
                                     <div class="modal fade" id="modalExercise{{ lectii.slug }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                                       <div class="modal-dialog modal-lg modal-notify modal-primary" role="document">
@@ -207,13 +211,13 @@
                                             </div>
                                             <!-- Footer -->
                                             <div class="modal-footer">
-                                              <button type="submit" class="btn btn-outline-primary rounded-pill">Save</button>
+                                              <button type="submit" class="btn btn-outline-primary rounded-pill px-2 py-0">Save</button>
                                             </div>
                                           </div>
                                         </div>
                                       </form>
                                     </div>
-                                    <button type="button" class="btn btn-outline-primary rounded-pill py-1" data-toggle="modal" data-target="#modalExercise{{ lectii.slug }}" data-backdrop="false">{% bs_icon 'plus' %} Exercitiu</button>
+                                    <button type="button" class="btn-sm btn-outline-primary rounded-pill px-2 py-0" data-toggle="modal" data-target="#modalExercise{{ lectii.slug }}" data-backdrop="false">{% bs_icon 'plus' %} Exercitiu</button>
                                 </td>
                             </tr>
                           {% endfor %}
@@ -232,12 +236,12 @@
                   <div class="d-flex justify-content-end">
                     <div class="row my-4">
                       <div class="mr-1">
-                        <a class="btn btn-outline-primary rounded-pill py-2" data-toggle="modal" data-target="#modalLessonsForm" data-backdrop="false">{% bs_icon 'plus' %} Lectie</a>
+                        <button class="btn-sm btn-outline-primary rounded-pill px-2 py-0" data-toggle="modal" data-target="#modalLessonsForm" data-backdrop="false">{% bs_icon 'plus' %} Lectie</button>
                       </div>
                       
                       <form action="{% url 'staff:deleteCategory' id=category.id %}" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-danger rounded-pill py-2">Delete</button>
+                        <button type="submit" class="btn-sm btn-outline-danger rounded-pill px-2 py-0">Delete</button>
                       </form>
                     </div>
                   </div>
@@ -284,7 +288,7 @@
         
                   <!-- Footer -->
                   <div class="modal-footer justify-content-center">
-                    <button type="submit" class="btn btn-outline-primary rounded-pill py-1">Save</button>
+                    <button type="submit" class="btn btn-outline-primary rounded-pill px-2 py-0">Save</button>
                   </div>
                 </div>
               </form>
