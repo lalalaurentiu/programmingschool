@@ -32,12 +32,66 @@
             </div>
             <div class="md-form">
                 <label for="id_video">Linkul Videoclipului</label>
-                {{ updateLessonForm.code_link }}
+                {{ updateLessonForm.video }}
             </div>
             <button type="submit"  class="btn btn-outline-primary rounded-pill">Update</button>
         </form>
     </div>
-    <div class="container-fluid mt-5">
-        Ceva
+    <h2 class="mt-3">Preview Lesson content </h2>
+    <div class="container-fluid border mt-2 bg-white">
+        <div class="pt-5 ml-1">
+            <div class="mt-5">
+                
+                    <h1 id="title"></h1>
+                    
+                    <div id="content">
+
+                    </div>
+    
+                    <div id="button" class="p-3">
+                        
+                    </div>
+            
+                    <div id="video" class="container justify-content-center" >
+
+                    </div>
+                
+            </div>
+        </div>
     </div>
+    <script>
+        let code = [
+            $("#id_code_python"),
+            $("#id_code_html"),
+            $("#id_code_css"),
+            $("#id_code_js"),
+        ]
+        $(document).ready( function (){
+          $("#title").html($("#id_title").val());
+          $("#content").html($("#id_content").val());
+          $.each(code, function (){
+            if ($(this).val() !== ""){
+                $("#button").html(`<button type="button" class="btn btn-primary">Try code</button>`)
+            }
+          })
+          if ($("#id_video").val() !== ""){
+              $("#id_video").html(`<video class="border w-100" src="${$("#id_video").val()}"></video>`);
+          }
+        })
+
+        $("#id_title").on("keyup", function (){
+          $("#title").html($("#id_title").val())
+        });
+        $("#id_content").on("keyup", function (){
+          $("#content").html($("#id_content").val())
+        });
+        $.each(code, function (){
+           $(this).on("keyup", function (){
+                $("#button").html(`<button type="button" class="btn btn-primary">Try code</button>`)
+           })
+          })
+        $("#id_video").on("keyup", function (){
+          $("#video").html(`<video class="border w-100" src="${$("#id_video").val()}"></video>`)
+        });
+      </script>
 {% endblock %}
