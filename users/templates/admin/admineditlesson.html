@@ -59,6 +59,10 @@
             </div>
         </div>
     </div>
+    <div id="previewCode" style="width: 100%;height: 100%;background-color: rgba(157, 164, 177, 0.9);z-index: 5;position: fixed;top: 0;left: 0;transform: translateX(-100%);">
+        
+    </div>
+    
     <script>
         let code = [
             $("#id_code_python"),
@@ -71,12 +75,38 @@
           $("#content").html($("#id_content").val());
           $.each(code, function (){
             if ($(this).val() !== ""){
-                $("#button").html(`<button type="button" class="btn btn-primary">Try code</button>`)
+                $("#button").html(`<button id="previewCodeBtn" type="button" class="btn btn-primary">Try code</button>`)
             }
           })
           if ($("#id_video").val() !== ""){
               $("#id_video").html(`<video class="border w-100" src="${$("#id_video").val()}"></video>`);
           }
+          $("#previewCode").append(
+            '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">' + 
+            '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">' +
+            '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
+            '<script src="/static/python_interpretor/js/skulpt-stdlib.js"><\/script>'+
+            '<script src="/static/python_interpretor/js/codemirrorepl.js"><\/script>'+
+            '<script src="/static/python_interpretor/js/repl.js"><\/script>'+
+            '<script src="/static/python_interpretor/js/python.js"><\/script>'+
+            '<script src="/static/python_interpretor/js/editor.js"><\/script>'+
+            '<script src="/static/python_interpretor/js/plugins.js"><\/script>'+
+
+            `
+            <div style="margin-top: 100px;">
+                <textarea id="code">${$("#id_code_python").val()}</textarea>
+                <button class="btn btn-primary" id="skulpt_run">{% bs_icon 'play' %} Run</button>  
+                <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button> 
+                <button type="button" class="btn btn-success" onclick="($('#previewCode').css('transform', 'translateX(-100%)'),$('#previewCode').empty())"> {% bs_icon 'x' %} close</button>
+            </div>
+            <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+            </div>
+            `
+          )
+          $("#previewCodeBtn").on("click", function(){
+            $("#previewCode").css("transform", "translateX(0)")
+        })
         })
 
         $("#id_title").on("keyup", function (){
@@ -87,11 +117,52 @@
         });
         $.each(code, function (){
            $(this).on("keyup", function (){
-                $("#button").html(`<button type="button" class="btn btn-primary">Try code</button>`)
+                $("#button").html(`<button type="button" class="btn btn-primary" onclick="activate()">Try code</button>`)
            })
           })
         $("#id_video").on("keyup", function (){
           $("#video").html(`<video class="border w-100" src="${$("#id_video").val()}"></video>`)
         });
+        
+        function activate (){
+            $("#previewCode").css("transform", "translateX(0)")
+            $("#previewCode").append(
+                '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">' + 
+                '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">' +
+                '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/skulpt-stdlib.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/codemirrorepl.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/repl.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/python.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/editor.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/plugins.js"><\/script>'+
+
+                `
+                <div style="margin-top: 100px;">
+                    <textarea id="code">${$("#id_code_python").val()}</textarea>
+                    <button class="btn btn-primary" id="skulpt_run">{% bs_icon 'play' %} Run</button>  
+                    <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button> 
+                    <button type="button" class="btn btn-success" onclick="($('#previewCode').css('transform', 'translateX(-100%)'),$('#previewCode').empty())"> {% bs_icon 'x' %} close</button>
+                </div>
+                <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                    <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+                </div>
+                `
+            )
+        }
+        
       </script>
+      
 {% endblock %}
+<div style="position: relative;">
+    <div class="CodeMirror-gutter-wrapper" style="position: absolute; left: -31px;">
+        <div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">
+            1
+        </div>
+    </div>
+    <pre>
+        <span style="padding-right: 0.1px;">
+            <span class="cm-variable">bvn</span>
+        </span>
+    </pre>
+</div>
