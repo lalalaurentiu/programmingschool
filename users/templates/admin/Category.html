@@ -2,8 +2,53 @@
 {% load static%}
 {% load bootstrap_icons %}
 
+{% block sidebar %}
+
+  <li>
+    <a class="collapsible-header waves-effect arrow-r">
+      <i class="w-fa fas fa-tachometer-alt"></i>Categori<i class="fas fa-angle-down rotate-icon"></i>
+    </a>
+    <div class="collapsible-body">
+      <ul>
+        {% for category in categorys %}
+          <li>
+            <a href="#{{ category.slug }}" class="waves-effect">{{ category.title }}</a>
+          </li>
+        {%  endfor %}
+      </ul>
+    </div>
+  </li>
+
+  <li>
+    <a class="collapsible-header waves-effect arrow-r">
+      <i class="w-fa fas fa-tachometer-alt"></i>Lectii<i class="fas fa-angle-down rotate-icon"></i>
+    </a>
+    <div class="collapsible-body">
+        {% for category in categorys %}
+          <ul class="collapsible collapsible-accordion m-0 border-bottom">
+            <li>
+              <a class="collapsible-header waves-effect arrow-r">
+                {{ category.title }}<i class="fas fa-angle-down rotate-icon"></i>
+              </a>
+              <div class="collapsible-body">
+                <ul>
+                  {% for lectii in category.lessons.all %}
+                  <li>
+                    <a href="#{{ lectii.slug }}" class="waves-effect">{{ lectii.title }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+          </ul>
+        {%  endfor %}
+    </div>
+  </li>
+  
+{% endblock %}
+
 {% block content %}
-  <!-- Category Form -->
+<!-- Category Form -->
   <div class="modal fade right modal-scrolling" id="modalCategoryForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
       <!-- Content -->
@@ -49,8 +94,12 @@
               <div class="card card-cascade narrower z-depth-0">
   
                 <div class="view view-cascade gradient-card-header blue-gradient narrower p-3  d-flex justify-content-between align-items-center">
-  
-                  <a href="" class="white-text mx-3 px-4">{{ category.title }}</a>
+                  <style>
+                    #{{ category.slug }}:target{
+                      border-bottom: 1px solid white;
+                    }
+                  </style>
+                  <a id="{{ category.slug }}" href="" class="white-text mx-3 px-4">{{ category.title }}</a>
 
                 </div>
   
@@ -76,7 +125,12 @@
                           {% for lectii in category.lessons.all %}
                             <tr>
                                 <td class="d-flex justify-content-between">
-                                    <a href="{% url 'staff:editlessons' id=lectii.id %}">Lectia {{ lectii }}</a>
+                                  <style>
+                                    #{{ lectii.slug }}:target{
+                                      border-bottom: 1px solid black;
+                                    }
+                                  </style>
+                                    <a id="{{ lectii.slug }}" href="{% url 'staff:editlessons' id=lectii.id %}">Lectia {{ lectii }}</a>
                                     <div class="d-flex">
                                       <a class="mr-2 ml-2" href="{{ lectii.get_absolute_url }}">{% bs_icon 'eye' %}</a>
                                       <form action="{% url 'staff:deletelessons' id=lectii.id %}" method="post">
@@ -236,7 +290,7 @@
                   <div class="d-flex justify-content-end">
                     <div class="row my-4">
                       <div class="mr-1">
-                        <button class="btn-sm btn-outline-primary rounded-pill px-2 py-0" data-toggle="modal" data-target="#modalLessonsForm" data-backdrop="false">{% bs_icon 'plus' %} Lectie</button>
+                        <button class="btn-sm btn-outline-primary rounded-pill px-2 py-0" data-toggle="modal" data-target="#modalLessons{{ category.slug }}" data-backdrop="false">{% bs_icon 'plus' %} Lectie</button>
                       </div>
                       
                       <form action="{% url 'staff:deleteCategory' id=category.id %}" method="post">
@@ -257,7 +311,7 @@
           </div>
           <!-- Card -->
           <!-- Lessons Form -->
-          <div class="modal fade right modal-scrolling" id="modalLessonsForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" style="display: none;" aria-hidden="true">
+          <div class="modal fade right modal-scrolling" id="modalLessons{{ category.slug }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
               <!-- Content -->
               <div class="modal-content">
