@@ -25,37 +25,33 @@
 </style>
 {% endblock %}
 {% block content %}
-{% for e in exercise %}
-<div class="mt-5 ml-1">
-        <div class="pt-3">
-                <h1>{{ e.title }}</h1>
-                <p>{{ e.description }}</p> 
-        </div>
-</div>
+        {% for e in exercise %}
+                <div class="mt-5 ml-1">
+                        <div class="pt-3">
+                                <h1>{{ e.title }}</h1>
+                                <p>{{ e.description }}</p> 
+                        </div>
+                </div>
 
-<div class="container-fluid">
-<textarea id="code" cols="85" rows="25">
-{{ e.exercise }}
-</textarea>
-<div class="row border border-prymary">
-<button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button>
-<template id="help">
-        <swal-html>{{ e.help|safe }}</swal-html> 
-</template>
-<button class="btn btn-outline-info" onclick="help()"><i class="far fa-question-circle"></i> Help</button> 
+                <div class="container-fluid" style="min-height: 100vh;">
+                        <textarea id="code" cols="85" rows="25">{{ e.exercise }}</textarea>
+                        <div class="border border-prymary">
+                                <button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button>
+                                        <template id="help">
+                                                <swal-html>{{ e.help|safe }}</swal-html> 
+                                        </template>
+                                <button class="btn btn-outline-info" onclick="help()"><i class="far fa-question-circle"></i> Help</button> 
+                                        
+                                <button class="btn btn-danger" id="clearoutput">Clear</button>
+                        </div>
+                        <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                                <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+                        </div>
+                </div>
+
+        {% endfor %}
         <script>
                 function help (){Swal.fire({template : '#help'})}
-                
         </script>
-        <div class=" text-center">
-                <a class="btn btn-danger" id="clearoutput">Clear</a>
-        </div>
-</div>
-{% endfor %}
-<div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
-<pre class="pl-3" id="edoutput" style=" color: white;">
-</pre>
-</div>
-</div>
 {% endblock %}
 {% block scripts %}{% include 'includes/scripts.html' %}{% endblock %}

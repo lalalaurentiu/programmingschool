@@ -3,34 +3,34 @@
 {% load bootstrap_icons %}
 
 {% block content%}
-    <div class="container-fluid border p-5 bg-white">
+    <div class="container-fluid border p-1 p-md-5 bg-white">
         <form method="post" >
             {% csrf_token %}
-            <div class="md-form">
+            <div class="md-form ml-5 mr-5">
                 <label for="id_title">Titlu</label>
                 {{ updateLessonForm.title }}
             </div>
-            <div class="md-form">
+            <div class="md-form ml-5 mr-5">
                 <label for="id_content">Content</label>
                 {{ updateLessonForm.content }}
             </div>
-            <div class="md-form">
+            <div class="md-form ml-5 mr-5">
                 <label for="id_code_python">Cod Python</label>
                 {{ updateLessonForm.code_python }}
             </div>
-            <div class="md-form">
+            <div class="md-form ml-5 mr-5">
                 <label for="id_code_html">Cod HTML</label>
                 {{ updateLessonForm.code_html }}
             </div>
-            <div class="md-form">
+            <div class="md-form ml-5 mr-5">
                 <label for="id_code_css">Cod CSS</label>
                 {{ updateLessonForm.code_css }}
             </div>
-            <div class="md-form">
+            <div class="md-form ml-5 mr-5">
                 <label for="id_code_js">Cod JavaScript</label>
                 {{ updateLessonForm.code_js }}
             </div>
-            <div class="md-form">
+            <div class="md-form ml-5 mr-5">
                 <label for="id_video">Linkul Videoclipului</label>
                 {{ updateLessonForm.video }}
             </div>
@@ -58,10 +58,13 @@
                 
             </div>
         </div>
-    </div>
-    <div id="previewCode" style="width: 100%;height: 100%;background-color: rgba(157, 164, 177, 0.9);z-index: 5;position: fixed;top: 0;left: 0;transform: translateX(-100%);">
+        <div id="previewCode" style="width: 100%;height: 100%;background-color: rgba(157, 164, 177, 0.9);z-index: 5;position: sticky;top: 0;left: 0;transform: translateX(-100%);">
         
+        </div>
     </div>
+    <div style="position: fixed;right: 25px;bottom: 50px;">
+        <a href="{% url 'staff:category' %}" class="btn btn-primary rounded-pill">Dashboard</a> 
+    </div> 
     
     <script>
         let code = [
@@ -75,35 +78,13 @@
           $("#content").html($("#id_content").val());
           $.each(code, function (){
             if ($(this).val() !== ""){
-                $("#button").html(`<button id="previewCodeBtn" type="button" class="btn btn-primary">Try code</button>`)
+                $("#button").html(`<button type="button" class="btn btn-primary" onclick="activate()">Try code</button>`)
             }
           })
           if ($("#id_video").val() !== ""){
               $("#id_video").html(`<video class="border w-100" src="${$("#id_video").val()}"></video>`);
           }
-          $("#previewCode").append(
-            '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">' + 
-            '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">' +
-            '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
-            '<script src="/static/python_interpretor/js/skulpt-stdlib.js"><\/script>'+
-            '<script src="/static/python_interpretor/js/codemirrorepl.js"><\/script>'+
-            '<script src="/static/python_interpretor/js/repl.js"><\/script>'+
-            '<script src="/static/python_interpretor/js/python.js"><\/script>'+
-            '<script src="/static/python_interpretor/js/editor.js"><\/script>'+
-            '<script src="/static/python_interpretor/js/plugins.js"><\/script>'+
-
-            `
-            <div style="margin-top: 100px;">
-                <textarea id="code">${$("#id_code_python").val()}</textarea>
-                <button class="btn btn-primary" id="skulpt_run">{% bs_icon 'play' %} Run</button>  
-                <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button> 
-                <button type="button" class="btn btn-success" onclick="($('#previewCode').css('transform', 'translateX(-100%)'),$('#previewCode').empty())"> {% bs_icon 'x' %} close</button>
-            </div>
-            <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
-                <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
-            </div>
-            `
-          )
+       
           $("#previewCodeBtn").on("click", function(){
             $("#previewCode").css("transform", "translateX(0)")
         })
@@ -126,7 +107,8 @@
         
         function activate (){
             $("#previewCode").css("transform", "translateX(0)")
-            $("#previewCode").append(
+            if ($("#id_code_python").val()){
+                $("#previewCode").html(
                 '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">' + 
                 '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">' +
                 '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
@@ -149,20 +131,9 @@
                 </div>
                 `
             )
+            }
         }
         
       </script>
       
 {% endblock %}
-<div style="position: relative;">
-    <div class="CodeMirror-gutter-wrapper" style="position: absolute; left: -31px;">
-        <div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">
-            1
-        </div>
-    </div>
-    <pre>
-        <span style="padding-right: 0.1px;">
-            <span class="cm-variable">bvn</span>
-        </span>
-    </pre>
-</div>

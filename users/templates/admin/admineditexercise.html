@@ -3,9 +3,70 @@
 {% load bootstrap_icons %}
 
 {% block content%}
-    <form method="post" >
-        {% csrf_token %}
-        {{ updateExerciseForm.as_p }}
-        <button type="submit">Update</button>
-    </form>
+    <div class="container-fluid border p-1 p-md-5 bg-white">
+        <form method="post" >
+            {% csrf_token %}
+            <div class="md-form ml-5 mr-5">
+                <label for="id_title">Titlu</label>
+                {{ updateExerciseForm.title }}
+            </div>
+            <div class="md-form ml-5 mr-5">
+                <label for="id_content">Descriere</label>
+                {{ updateExerciseForm.description }}
+            </div>
+            <div class="md-form ml-5 mr-5">
+                <label for="id_content">Exercitiu</label>
+                {{ updateExerciseForm.exercise }}
+            </div>
+            <div class="md-form ml-5 mr-5">
+                <label for="id_content">Help</label>
+                {{ updateExerciseForm.help }}
+            </div>
+            <button class="btn btn-outline-primary rounded-pill" type="submit">Update</button>
+        </form>
+    </div>
+    <h2 class="mt-3">Preview Exercise content </h2>
+    <div class="container-fluid">
+        <link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">
+        <link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">
+
+        <script src="/static/python_interpretor/js/skulpt.js" type="text/javascript"></script>
+        <script src="/static/python_interpretor/js/skulpt-stdlib.js" type="text/javascript"></script> 
+        <script src="/static/python_interpretor/js/codemirrorepl.js" type="text/javascript"></script>
+        <script src="/static/python_interpretor/js/repl.js" type="text/javascript"></script>
+        <script src="/static/python_interpretor/js/python.js" type="text/javascript"></script>
+        <script src="/static/python_interpretor/js/editor.js" type="text/javascript"></script>
+        <script src="/static/python_interpretor/js/plugins.js" type="text/javascript"></script>
+
+        <div class="container-fluid border mt-2 bg-white">
+            <div class="mt-5 ml-1">
+                <div class="pt-3">
+                        <h1 id="title"></h1>
+                        <p id="description"></p> 
+                </div>
+            </div>
+        
+            <div>
+                <textarea id="code" cols="85" rows="25"></textarea>
+                <div class=" border border-prymary">
+                    <button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button>
+                    <template id="help">
+                            <swal-html></swal-html> 
+                    </template>
+                    <button class="btn btn-outline-info" onclick="help()"><i class="far fa-question-circle"></i> Help</button> 
+                    <button class="btn btn-danger" id="clearoutput">Clear</button>
+                </div>
+                <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                    <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position: fixed;right: 25px;bottom: 50px;">
+        <a href="{% url 'staff:category' %}" class="btn btn-primary rounded-pill">Dashboard</a> 
+    </div> 
+    <script>
+        function help (){Swal.fire({template : '#help'})}
+    </script>
+    
 {% endblock %}
