@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse,get_object_or_404
 from django.contrib import messages
 
 from python_exercise.models import Exercise
@@ -190,9 +190,16 @@ class EditLesson(TemplateView):
         if request.user.is_staff:
             template = "admin/admineditlesson.html"
             lesson = Lesson.objects.get(id=id)
+            lessons = Lessons.objects.all()
+
+            lessons_name = get_object_or_404(lessons, slug=lessons.get(id=lesson.category_id))
+            lessons_content = Lesson.objects.filter(category=lessons_name)
+            
             updateLessonForm = LessonForm(instance = lesson)
             context = {
-                "updateLessonForm":updateLessonForm
+                "updateLessonForm":updateLessonForm,
+                "lessons_content":lessons_content,
+                "lesson":lesson
             }
             response = render(request, template, context)
             return response
