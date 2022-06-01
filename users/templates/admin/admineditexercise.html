@@ -27,9 +27,7 @@
     </div>
     <h2 class="mt-3">Preview Exercise content </h2>
     <div class="container-fluid">
-        <template id="help">
-            
-        </template>
+        
         <div class="container-fluid border mt-2 bg-white">
             <div class="mt-5 ml-1">
                 <div class="pt-3">
@@ -72,7 +70,11 @@
                 </div>
                 `
             )
-            $("#help").html(`<swal-html>${$("#id_help").val()}</swal-html>`)
+            $("#help_content").html(`
+                <template id="help">
+                    <swal-html>${$("#id_help").val()}</swal-html>
+                </template>
+                `)
         })
         function help (){Swal.fire({template : '#help'})}
 
@@ -110,8 +112,14 @@
         })
 
         $("#id_help").on("keyup", function (){
-            $("#help").html(`<swal-html>${$("#id_help").val()}</swal-html>`)
+            $("#help_content").html(`
+            <template id="help">
+                <swal-html>${$("#id_help").val()}</swal-html>
+            </template>
+            `)
         })
     </script>
-    
+    <div id="help_content">
+
+    </div>
 {% endblock %}
