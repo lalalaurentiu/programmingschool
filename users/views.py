@@ -192,7 +192,7 @@ class EditLesson(TemplateView):
             lesson = Lesson.objects.get(id=id)
             lessons = Lessons.objects.all()
 
-            lessons_name = get_object_or_404(lessons, slug=lessons.get(id=lesson.category_id))
+            lessons_name = get_object_or_404(lessons, slug=lessons.get(slug=lesson.category.slug))
             lessons_content = Lesson.objects.filter(category=lessons_name)
             
             updateLessonForm = LessonForm(instance = lesson)
