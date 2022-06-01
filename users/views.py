@@ -190,10 +190,8 @@ class EditLesson(TemplateView):
         if request.user.is_staff:
             template = "admin/admineditlesson.html"
             lesson = Lesson.objects.get(id=id)
-            lessons = Lessons.objects.all()
 
-            lessons_name = get_object_or_404(lessons, slug=lessons.get(slug=lesson.category.slug))
-            lessons_content = Lesson.objects.filter(category=lessons_name)
+            lessons_content = Lesson.objects.filter(category=lesson.category.id)
             
             updateLessonForm = LessonForm(instance = lesson)
             context = {
