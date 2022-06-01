@@ -44,8 +44,8 @@ def lesson(request, slug = None):
             context = {
                 'lessons_content': lessons_content.order_by("id"),
                 'lessons_name':lesson_name,
-                'exercise':exercise,
-                'lessons':lessons.filter(category = lesson_name.category),
+                'exercise':exercise.order_by("id"),
+                'lessons':lessons.filter(category = lesson_name.category).order_by("id"),
                 "category":str(lesson_name.category)
                 }
 
