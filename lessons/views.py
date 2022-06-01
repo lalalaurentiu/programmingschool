@@ -23,7 +23,7 @@ def lessons(request, lesson_slug = None):
         lessons = lessons.filter(category=category_name)
 
         context = {
-            'lessons':lessons, 
+            'lessons':lessons.order_by("id"), 
             'category':category_name, 
             'categories':categories
             }
