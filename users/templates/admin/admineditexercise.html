@@ -27,17 +27,9 @@
     </div>
     <h2 class="mt-3">Preview Exercise content </h2>
     <div class="container-fluid">
-        <link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">
-        <link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">
-
-        <script src="/static/python_interpretor/js/skulpt.js" type="text/javascript"></script>
-        <script src="/static/python_interpretor/js/skulpt-stdlib.js" type="text/javascript"></script> 
-        <script src="/static/python_interpretor/js/codemirrorepl.js" type="text/javascript"></script>
-        <script src="/static/python_interpretor/js/repl.js" type="text/javascript"></script>
-        <script src="/static/python_interpretor/js/python.js" type="text/javascript"></script>
-        <script src="/static/python_interpretor/js/editor.js" type="text/javascript"></script>
-        <script src="/static/python_interpretor/js/plugins.js" type="text/javascript"></script>
-
+        <template id="help">
+            
+        </template>
         <div class="container-fluid border mt-2 bg-white">
             <div class="mt-5 ml-1">
                 <div class="pt-3">
@@ -46,19 +38,8 @@
                 </div>
             </div>
         
-            <div>
-                <textarea id="code" cols="85" rows="25"></textarea>
-                <div class=" border border-prymary">
-                    <button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button>
-                    <template id="help">
-                            <swal-html></swal-html> 
-                    </template>
-                    <button class="btn btn-outline-info" onclick="help()"><i class="far fa-question-circle"></i> Help</button> 
-                    <button class="btn btn-danger" id="clearoutput">Clear</button>
-                </div>
-                <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
-                    <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
-                </div>
+            <div id="exercise">
+                
             </div>
         </div>
     </div>
@@ -66,7 +47,71 @@
         <a href="{% url 'staff:category' %}" class="btn btn-primary rounded-pill">Dashboard</a> 
     </div> 
     <script>
+        $(document).ready(function(){
+            $("#title").html($("#id_title").val())
+            $("#description").html($("#id_description").val())
+            $("#exercise").html(
+                '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">' + 
+                '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">' +
+                '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/skulpt-stdlib.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/codemirrorepl.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/repl.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/python.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/editor.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/plugins.js"><\/script>'+
+                `
+                <textarea id="code" cols="85" rows="25">${$("#id_exercise").val()}</textarea>
+                <div class=" border border-prymary">
+                    <button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button>
+                    <button class="btn btn-outline-info" onclick="help()"><i class="far fa-question-circle"></i> Help</button> 
+                    <button class="btn btn-danger" id="clearoutput">Clear</button>
+                </div>
+                <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                    <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+                </div>
+                `
+            )
+            $("#help").html(`<swal-html>${$("#id_help").val()}</swal-html>`)
+        })
         function help (){Swal.fire({template : '#help'})}
+
+        $("#id_title").on("keyup", function (){
+            $("#title").html($("#id_title").val())
+        })
+
+        $("#id_description").on("keyup", function (){
+            $("#description").html($("#id_description").val())
+        })
+
+        $("#id_exercise").change(function (){
+            $("#exercise").html(
+                '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">' + 
+                '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">' +
+                '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/skulpt-stdlib.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/codemirrorepl.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/repl.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/python.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/editor.js"><\/script>'+
+                '<script src="/static/python_interpretor/js/plugins.js"><\/script>'+
+                `
+                <textarea id="code" cols="85" rows="25">${$("#id_exercise").val()}</textarea>
+                <div class=" border border-prymary">
+                    <button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button>
+                    <button class="btn btn-outline-info" onclick="help()"><i class="far fa-question-circle"></i> Help</button> 
+                    <button class="btn btn-danger" id="clearoutput">Clear</button>
+                </div>
+                <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                    <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+                </div>
+                `
+            )
+        })
+
+        $("#id_help").on("keyup", function (){
+            $("#help").html(`<swal-html>${$("#id_help").val()}</swal-html>`)
+        })
     </script>
     
 {% endblock %}
