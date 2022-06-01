@@ -86,7 +86,7 @@
 
     {% for category in categorys %}
         <!-- Card -->
-        <div class="card card-cascade narrower">
+        <div class="card card-cascade narrower" style="min-width: 900px;">
   
             <!-- Section: Table -->
             <section>
@@ -99,7 +99,7 @@
                       border-bottom: 1px solid white;
                     }
                   </style>
-                  <a id="{{ category.slug }}" href="" class="white-text mx-3 px-4">{{ category.title }}</a>
+                  <a id="{{ category.slug }}" href="{% url 'lessons:lessons_category' lesson_slug=category.slug %}" class="white-text mx-3 px-4">{{ category.title }}</a>
 
                 </div>
   

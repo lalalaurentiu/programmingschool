@@ -19,5 +19,5 @@ class Exercise(models.Model):
         return reverse('python_exercise:exercise', args=[self.slug])
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = self.title.replace(" ", "_")
         super(Exercise,self).save(*args, **kwargs)

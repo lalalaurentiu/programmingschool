@@ -59,7 +59,7 @@
                         
                         <script>
                             function {{ lesson.slug }}(){
-                                $("#{{ lesson.slug }}").append(
+                                $("#{{ lesson.slug }}").html(
                                     '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
                                     '<script src="/static/python_interpretor/js/skulpt-stdlib.js"><\/script>'+
                                     '<script src="/static/python_interpretor/js/codemirrorepl.js"><\/script>'+

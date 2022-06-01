@@ -20,86 +20,71 @@
 {% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<div class="pt-5">
-<div class="mt-5">
-<form method="post" >     
-{% csrf_token %}
-<span class="d-none">
-{{ form.project_title}}
-</span>
-{{ form.project_code}}
-<div class="row border border-prymary">
-<div class="p-1 text-right">
-<button type="button" class="btn btn-primary " id="skulpt_run"><span></span>{% bs_icon 'play' %} Run</button> 
-</div>
-<div class="p-1 text-center">
-        <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button>
-</div>
-<div class="p-1 text-right">
-<button onclick="send()" class="btn btn-success " type="submit">{% bs_icon 'save' %}Save Project</button>   
-</div>
-</div>
-</form>
-<script>
-        
-        function send(){
-                
-                if ($('#id_project_title').val() == ""){
-                Swal.fire({
-                title: 'Introdu numele proiectului',
-                input: 'text',
-                inputAttributes: {
-                        autocapitalize: 'off'
-                },
-                showCancelButton: false,
-                confirmButtonText: 'OK',
-                allowOutsideClick: false,
-                preConfirm: (value) => {
-                        if (!value) {
-                        Swal.showValidationMessage(
-                                'Nume obligatoriu'
-                        )}
-                }
-                }).then((results) => {
-                $('#id_project_title').val(results.value);
-                var code =  $('.cm-variable');
-                var prepare_code = $('#code');
-                for(var i = 0; i < code.length; i++){
-                                prepare_code.append($(code[i]).text());       
-                        }        
-                });         
-        }}
-</script>
-<div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
-<pre class="pl-3" id="edoutput" style=" color: white;">
-</pre>
-</div>
-</div>
-</div>
+        {% if user.is_authenticated %}
+                <div class="pt-5" style="min-height: 100vh;">
+                        <div class="mt-5">
+                                <form method="post" >     
+                                        {% csrf_token %}
+                                        <span class="d-none">
+                                                {{ form.project_title}}
+                                        </span>
+                                        {{ form.project_code}}
+                                        <div class="border border-prymary">
+                                                <button type="button" class="btn btn-primary " id="skulpt_run"><span></span>{% bs_icon 'play' %} Run</button> 
+                                                <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button>
+                                                <button onclick="send()" class="btn btn-success " type="submit">{% bs_icon 'save' %}Save Project</button>   
+                                        </div>
+                                </form>
 
-{% else %}
-<div class="pt-5">
-<div class="mt-5 ">
-<textarea id="code" cols="85" rows="25">
-#Enter your code here
-</textarea>
-<div class="row border border-prymary">
-<div class="p-1 text-right">
-<button type="button" class="btn btn-primary " id="skulpt_run"><span></span>{% bs_icon 'play' %} Run</button> 
-</div>
-<div class="p-1 text-center">
-        <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button>
-</div>        
-</div>
-</div>
+                                <script>
+                                        function send(){
+                                                
+                                                if ($('#id_project_title').val() == ""){
+                                                Swal.fire({
+                                                title: 'Introdu numele proiectului',
+                                                input: 'text',
+                                                inputAttributes: {
+                                                        autocapitalize: 'off'
+                                                },
+                                                showCancelButton: false,
+                                                confirmButtonText: 'OK',
+                                                allowOutsideClick: false,
+                                                preConfirm: (value) => {
+                                                        if (!value) {
+                                                        Swal.showValidationMessage(
+                                                                'Nume obligatoriu'
+                                                        )}
+                                                }
+                                                }).then((results) => {
+                                                $('#id_project_title').val(results.value);
+                                                var code =  $('.cm-variable');
+                                                var prepare_code = $('#code');
+                                                for(var i = 0; i < code.length; i++){
+                                                                prepare_code.append($(code[i]).text());       
+                                                        }        
+                                                });         
+                                        }}
+                                </script>
 
-<div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
-<pre class="pl-3" id="edoutput" style=" color: white;">
-</pre>
-</div>
-</div>
-<p><b>To save your projects, please login</b></p>
-</div>
-{% endif %}
+                                <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                                        <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+                                </div>
+                        </div>
+                </div>
+        {% else %}
+                <div class="pt-5" style="min-height: 100vh;">
+                        <div class="mt-5 ">
+                                <textarea id="code" cols="85" rows="25">#Enter your code here</textarea>
+                                <div class="border border-prymary">
+                                        <button type="button" class="btn btn-primary " id="skulpt_run"><span></span>{% bs_icon 'play' %} Run</button> 
+                                        <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button>
+                                </div>
+                        </div>
+
+                        <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                                <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+                        </div>
+                </div>
+                <p><b>To save your projects, please login</b></p>
+        {% endif %}
 {% endblock %}

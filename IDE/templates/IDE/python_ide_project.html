@@ -19,48 +19,44 @@
 {% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<div class="container mt-5">
-<form method="post">
-<button  onclick="send()" class="btn btn-outline-secondary " type="submit">Save Project</button>        
-{% csrf_token %}
-{{ form.project_code }}
-
-</form> 
-<div class="row justify-content-around">
-        <div class="col-2 p-1">
-                <button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button> 
-        </div>
-        <div class="col-2 p-1">
-                <form action="{% url 'IDE:project_delete'  projects.id  %}" method="POST">
-                        {% csrf_token %}
-                        <input class="btn btn-default btn-danger" type="submit" value="Delete" name="{{ projects.id }}"/>
-                </form>
-        </div>
-
-
-</div>
-<script>
-        function send(){
-                var code =  $('.cm-variable');
-                var prepare_code = $('#code');
-                for(var i = 0; i < code.length; i++){
-                        prepare_code.append($(code[i]).text());
+        {% if user.is_authenticated %}
+                <div class="container mt-5">
+                        <form method="post">
+                                <button  onclick="send()" class="btn btn-outline-secondary " type="submit">Save Project</button>        
+                                {% csrf_token %}
+                                {{ form.project_code }}
+                        </form> 
+                        <div class="row justify-content-around">
+                                <div class="col-2 p-1">
+                                        <button class="btn btn-primary " id="skulpt_run">{% bs_icon 'play' %} Run</button> 
+                                </div>
+                                <div class="col-2 p-1">
+                                        <form action="{% url 'IDE:project_delete'  projects.id  %}" method="POST">
+                                                {% csrf_token %}
+                                                <input class="btn btn-default btn-danger" type="submit" value="Delete" name="{{ projects.id }}"/>
+                                        </form>
+                                </div>
+                        </div>
                         
-                }        
-        }
-</script>
+                        <script>
+                                function send(){
+                                        var code =  $('.cm-variable');
+                                        var prepare_code = $('#code');
+                                        for(var i = 0; i < code.length; i++){
+                                                prepare_code.append($(code[i]).text());
+                                                
+                                        }        
+                                }
+                        </script>
 
-<div id="mycanvas" class="d-block" style="box-sizing: border-box ;">
-<pre id="edoutput" style=" color: black;">
-</pre>
-</div>
-<div class="text-center">
-<a class="btn btn-danger" id="clearoutput">Clear</a>        
-</div>
-
-</div>
-{% else %}
-<p><b>You must first login</b></p>
-{% endif %}
+                        <div id="mycanvas" class="d-block" style="box-sizing: border-box ;">
+                                <pre id="edoutput" style=" color: black;"></pre>
+                        </div>
+                        <div class="text-center">
+                                <a class="btn btn-danger" id="clearoutput">Clear</a>        
+                        </div>
+                </div>
+        {% else %}
+                <p><b>You must first login</b></p>
+        {% endif %}
 {% endblock %}

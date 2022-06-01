@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from embed_video.fields import EmbedVideoField
-from django.utils.text import slugify
+from django.utils.text import slugify,smart_split
 
 class Category(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -14,7 +14,7 @@ class Category(models.Model):
         return self.title
 
     def save(self,*args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = self.title.replace(" ", "_")
         super(Category, self).save(*args, **kwargs)
 
 class Lessons(models.Model):
@@ -30,7 +30,7 @@ class Lessons(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = self.title.replace(" ", "_")
         super(Lessons,self).save(*args, **kwargs)
 
 class Lesson(models.Model):
@@ -53,7 +53,7 @@ class Lesson(models.Model):
         return self.slug
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = self.title.replace(" ", "_")
         if self.code_python:
             self.code_link = self.category.slug
         super(Lesson,self).save(*args, **kwargs)
