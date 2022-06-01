@@ -81,7 +81,7 @@ class AdminCategoryadd(TemplateView):
             lessonForm = LessonForm()
             exerciseForm = ExerciseForm()
             context = {
-                "categorys":category,
+                "categorys":category.order_by("id"),
                 "categoryForm":categoryForm,
                 "lessonsForm":lessonsForm,
                 "lessonForm":lessonForm,
