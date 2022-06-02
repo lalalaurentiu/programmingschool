@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="pt-5 wow fadeIn">
-        <div class="m-5">
+    <div class="pt-5 wow fadeIn container-fluid">
+        <div class="mt-5">
             <div class="card text-white">
                 <div class="card-header">
                     <img style="object-fit: cover;
@@ -43,11 +43,9 @@
                                         </li>
                                     </ul>
 
-                                    <h1 class="pt-5 pb-1 text-light" style="font-size: 50px; letter-spacing: -2px">
-                                        <strong>
+                                    <h1 class="pt-5 pb-1 text-light" style="font-size: 40px; letter-spacing: -2px">
                                             Programming<br>
                                             School
-                                        </strong>
                                     </h1>
                                 </div>
                                 <div class="cardContent col-sm-4 text-end pt-2 text-light">
@@ -70,7 +68,7 @@
     </div>
 
 
-    <div class="container">
+
         <section class="wow fadeIn" data-wow-delay="0.3s">
             <div class="m-5">
                 <!-- Section heading -->
@@ -84,7 +82,7 @@
                 <div class="row">
 
                     <!-- Grid column -->
-                    <div class="col-md-4">
+                    <div class="col-md-6">
 
                         <!-- Grid row -->
                         <div class="row mb-3">
@@ -106,7 +104,7 @@
                             </div>
                             <div class="col-9">
                                 <h5 class="font-weight-bold">HTML</h5>
-                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                <p class="grey-text">HyperText Markup Language (HTML) este un limbaj de marcare utilizat pentru crearea paginilor web ce pot fi afișate într-un browser (sau navigator). Scopul HTML este mai degrabă prezentarea informațiilor – paragrafe, fonturi, tabele ș.a.m.d. – decât descrierea semanticii documentului. În cadrul dezvoltării web de tip front-end, HTML este utilizat împreună cu CSS și JavaScript.</p>
                             </div>
                         </div>
                         <!-- Grid row -->
@@ -130,7 +128,7 @@
                             </div>
                             <div class="col-9">
                                 <h5 class="font-weight-bold">CSS</h5>
-                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                <p class="grey-text">CSS sau Cascading Style Sheets este un standard pentru formatarea elementelor unui document HTML. Stilurile se pot atașa elementelor HTML prin intermediul unor fișiere externe sau în cadrul documentului, prin elementul &lt;style&gt; și/sau atributul style. CSS se poate utiliza și pentru formatarea elementelor XHTML, XML și SVGL. CSS este unui dintre tehnologiile de bază utilizate în procesul de dezvoltare web, împreună cu HTML și JavaScript.</p>
                             </div>
                         </div>
                         <!-- Grid row -->
@@ -142,7 +140,7 @@
                             </div>
                             <div class="col-9">
                                 <h5 class="font-weight-bold">JavaScript</h5>
-                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                <p class="grey-text">JavaScript (JS) este un limbaj de programare orientat obiect bazat pe conceptul prototipurilor. Este folosit mai ales pentru introducerea unor funcționalități în paginile web, codul JavaScript din aceste pagini fiind rulat de către browser. Limbajul este binecunoscut pentru folosirea sa în construirea siturilor web, dar este folosit și pentru accesul la obiecte încapsulate (embedded objects) în alte aplicații.</p>
                             </div>
                         </div>
                         <!-- Grid row -->
@@ -150,16 +148,8 @@
                     </div>
                     <!-- Grid column -->
 
-                    <!-- Grid column -->
-                    <div class="col-md-4 mb-2 text-md-left align-self-center">
-                        <img class="img-fluid z-depth-0" 
-                        src="https://media.gcflearnfree.org/content/55e0730c7dd48174331f5164_01_17_2014/whatisacomputer_mac.jpg" 
-                        alt="">
-                    </div>
                         <!-- Grid column -->
-
-                        <!-- Grid column -->
-                    <div class="col-md-4">
+                    <div class="col-md-6">
 
                         <!-- Grid row -->
                         <div class="row mb-2">
@@ -173,7 +163,7 @@
                             </div>
                             <div class="col-9">
                                 <h5 class="font-weight-bold">Python</h5>
-                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                <p class="grey-text">Python este un limbaj de programare dinamic, de nivel înalt, ce pune accent pe expresivitatea și înțelegerea ușoară a codului. Sintaxa sa permite implementări echivalente cu alte limbaje în mai puține linii de cod. Datorită acestui fapt, Python este foarte răspândit atât în programarea de aplicații, cât și în zona de scripting.</p>
                             </div>
                         </div>
                         <!-- Grid row -->
@@ -190,7 +180,7 @@
                             </div>
                             <div class="col-9">
                                 <h5 class="font-weight-bold">Bootstrap</h5>
-                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                <p class="grey-text">Bootstrap este un framework CSS gratuit și opened-source, direcționat către dezvoltarea web front-end receptivă și mobilă. Conține șabloane de design bazate pe CSS și JavaScript pentru tipografie, formulare, butoane, navigare și alte componente de interfață.</p>
                             </div>
                         </div>
                         <!-- Grid row -->
@@ -207,7 +197,7 @@
                             </div>
                             <div class="col-9">
                                 <h5 class="font-weight-bold">Django</h5>
-                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.</p>
+                                <p class="grey-text">Scopul principal al acestui framework este pentru dezvoltarea aplicațiilor site-urilor si aplicatiilor web complexe. Django pune accent pe reutilizarea codului, pe modularitate, dezvoltare rapidă a site-urilor web, ghidându-se după principiul "nu te repeta" (en. Don't repeat yourself - DRY). Django este codat de la un capăt la altul în Python, chiar și fișierele de configurare și modelele de date sunt implementate în acest limbaj de programare. Django oferă și un panou administrativ, care, deși vine preinstalat, este opțional, prin intermediul acestuia se pot crea, citi, actualiza și șterge cu ușurință informații din baza de date.</p>
                             </div>
                         </div>
                         <!-- Grid row -->
@@ -221,6 +211,5 @@
             </div>
 
         </section>
-    </div>
                 
 {% endblock %}
