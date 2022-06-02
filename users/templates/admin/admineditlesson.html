@@ -49,7 +49,24 @@
         <div class="pt-5 ml-1">
             <div class="mt-5">
                 {% for lectie in lessons_content %}
+                
                     {% if lesson.id == lectie.id %}
+                        {% if lectie.code_python %}
+                        <div class="m-2 border">
+                            Copy this snippet to show button code in page <br>
+                            <code>
+                                &lt;a onclick="{{ lectie.slug }}();" style="color: blue;"&gt;
+                                Try code 
+                                &lt;svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="i bi-chevron-double-rightb" viewBox="0 0 16 16" &gt;
+                                &lt;path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/&gt;
+                                &lt;path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/&gt;
+                                &lt;/svg&gt;
+                                &lt;/a&gt;
+                            </code>
+                            
+                        </div>
+                        
+                    {% endif %}
                         <div id="lesson" class="border">
                             <h1 id="title"></h1>
                 
