@@ -5,9 +5,9 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 class Exercise(models.Model):
-    category = models.ForeignKey(Lessons, null=True, on_delete=CASCADE, related_name="exercise")
+    category = models.ForeignKey(Lessons, null=True,blank=True, on_delete=CASCADE, related_name="exercise")
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=250, unique=True)
+    slug = models.SlugField(max_length=250)
     description = models.TextField(blank=True)
     exercise = models.TextField(blank=True)
     help = models.TextField(blank=True)
