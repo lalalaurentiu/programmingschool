@@ -40,6 +40,10 @@
                 <label for="id_video">Linkul Videoclipului</label>
                 {{ updateLessonForm.video }}
             </div>
+            <div class="md-form ml-5 mr-5">
+                <label for="id_slug">Slug</label>
+                {{ updateLessonForm.slug }}
+            </div>
             <button type="submit"  class="btn btn-outline-primary rounded-pill">Update</button>
             <a type="button" href="#lesson" class="btn btn-outline-info rounded-pill">View</a>
         </form>
@@ -51,7 +55,11 @@
                 {% for lectie in lessons_content %}
                 
                     {% if lesson.id == lectie.id %}
-                        {% if lectie.code_python %}
+                        {% if lectie.title == None and lectie.slug == None %}
+                            <div class="m-2 border">
+                                You must complete the field "Titlu" or "Slug" to show button code
+                            </div>
+                        {% elif lectie.code_python %}
                         <div class="m-2 border">
                             Copy this snippet to show button code in page <br>
                             <code>
@@ -63,10 +71,9 @@
                                 &lt;/svg&gt;
                                 &lt;/a&gt;
                             </code>
-                            
                         </div>
                         
-                    {% endif %}
+                        {% endif %}
                         <div id="lesson" class="border">
                             <h1 id="title"></h1>
                 
@@ -75,10 +82,52 @@
                             <div id="button" class="p-3"></div>
                     
                             <div id="video" class="container justify-content-center" ></div>
-                            <div id="previewCode" style="width: 100%;height: 100%;background-color: rgba(157, 164, 177, 0.9);z-index: 5;position: sticky;top: 0;left: 0;transform: translateX(-100%);">
-        
+                            <div id="{{lectie.slug}}" style="width: 100%;height: 100%;z-index: 5;position: sticky;top: 0;left: 0;transform: translateX(-100vw);">
+                                
                             </div>
                         </div>
+                        
+                        <script>
+                            let code = [
+                                $("#id_code_python"),
+                                $("#id_code_html"),
+                                $("#id_code_css"),
+                                $("#id_code_js"),
+                            ]
+                            function {{lectie.slug}}(){
+                                $('#{{lectie.slug}}').css('transform', 'translateX(0)')
+                                if ($("#id_code_python").val()){
+                                    $("#{{lectie.slug}}").html(
+                                    '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">' + 
+                                    '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">' +
+                                    '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
+                                    '<script src="/static/python_interpretor/js/skulpt-stdlib.js"><\/script>'+
+                                    '<script src="/static/python_interpretor/js/codemirrorepl.js"><\/script>'+
+                                    '<script src="/static/python_interpretor/js/repl.js"><\/script>'+
+                                    '<script src="/static/python_interpretor/js/python.js"><\/script>'+
+                                    '<script src="/static/python_interpretor/js/editor.js"><\/script>'+
+                                    '<script src="/static/python_interpretor/js/plugins.js"><\/script>'+
+
+                                    `
+                                    <div style="margin-top: 100px;">
+                                        <textarea id="code">${$("#id_code_python").val()}</textarea>
+                                        <button class="btn btn-primary" id="skulpt_run">{% bs_icon 'play' %} Run</button>  
+                                        <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button> 
+                                        <button type="button" class="btn btn-success" onclick="($('#{{ lectie.slug }}').css('transform', 'translateX(-100%)'),$('#{{ lectie.slug }}').empty())"> {% bs_icon 'x' %} close</button>
+                                    </div>
+                                    <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
+                                        <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
+                                    </div>
+                                    `
+                                )
+                                } else {
+                                    $("#{{lectie.slug}}").html(
+                                        "<span class='text-danger'>No code to show </span>"
+                                    )
+                                }
+                            }
+                            
+                        </script>
                     {% else %}
                         {% if lectie.title %}
                             <h1>{{lectie.title}}</h1>
@@ -103,12 +152,7 @@
     </div> 
     
     <script>
-        let code = [
-            $("#id_code_python"),
-            $("#id_code_html"),
-            $("#id_code_css"),
-            $("#id_code_js"),
-        ]
+        
         $(document).ready( function (){
           $("#title").html($("#id_title").val());
           $("#content").html($("#id_content").val());
@@ -124,6 +168,11 @@
           $("#previewCodeBtn").on("click", function(){
             $("#previewCode").css("transform", "translateX(0)")
         })
+            if ($("#content > a")){
+                if ($("#id_title").val() === "" || $("#id_slug").val() === ""){
+                    $("#content > a").css("color", "red")
+                }
+            }
         })
 
         $("#id_title").on("keyup", function (){
@@ -132,44 +181,19 @@
         $("#id_content").on("keyup", function (){
           $("#content").html($("#id_content").val())
         });
-        $.each(code, function (){
-           $(this).on("keyup", function (){
-                $("#button").html(`<button type="button" class="btn btn-primary" onclick="activate()">Try code</button>`)
-           })
-          })
+        
         $("#id_video").on("keyup", function (){
           $("#video").html(`<video class="border w-100" src="${$("#id_video").val()}"></video>`)
         });
-        
-        function activate (){
-            $("#previewCode").css("transform", "translateX(0)")
-            if ($("#id_code_python").val()){
-                $("#previewCode").html(
-                '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/codemirror.css">' + 
-                '<link rel="stylesheet" type="text/css" media="all" href="/static/python_interpretor/css/solarized.css">' +
-                '<script src="/static/python_interpretor/js/skulpt.js"><\/script>'+
-                '<script src="/static/python_interpretor/js/skulpt-stdlib.js"><\/script>'+
-                '<script src="/static/python_interpretor/js/codemirrorepl.js"><\/script>'+
-                '<script src="/static/python_interpretor/js/repl.js"><\/script>'+
-                '<script src="/static/python_interpretor/js/python.js"><\/script>'+
-                '<script src="/static/python_interpretor/js/editor.js"><\/script>'+
-                '<script src="/static/python_interpretor/js/plugins.js"><\/script>'+
-
-                `
-                <div style="margin-top: 100px;">
-                    <textarea id="code">${$("#id_code_python").val()}</textarea>
-                    <button class="btn btn-primary" id="skulpt_run">{% bs_icon 'play' %} Run</button>  
-                    <button type="button" class="btn btn-danger" id="clearoutput"> {% bs_icon 'trash' %} clear</button> 
-                    <button type="button" class="btn btn-success" onclick="($('#previewCode').css('transform', 'translateX(-100%)'),$('#previewCode').empty())"> {% bs_icon 'x' %} close</button>
-                </div>
-                <div id="mycanvas" class="d-block mt-3 text-light" style="box-sizing: border-box ;background-color: black;">
-                    <pre class="pl-3" id="edoutput" style=" color: white;"></pre>
-                </div>
-                `
-            )
-            }
-        }
-        
-      </script>
+        $.each(code, function (){
+            $(this).on("keyup", function (){
+                    if ($("#content > a")){
+                        if ($("#id_title").val() === "" || $("#id_slug").val() === ""){
+                            $("#content > a").css("color", "red")
+                        }
+                    }
+            })
+        })
+</script>
       
 {% endblock %}

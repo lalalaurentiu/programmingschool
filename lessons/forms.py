@@ -33,7 +33,7 @@ class LessonsAddForm(forms.ModelForm):
 class LessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
-        exclude = ("category", "slug")
+        exclude = ("category",)
         widgets = {
             "title":forms.TextInput(attrs={
                 "class":"form-control"
@@ -67,6 +67,9 @@ class LessonForm(forms.ModelForm):
                 "class":"form-control"
             }),
             "video":forms.TextInput(attrs={
+                "class":"form-control"
+            }),
+            "slug":forms.TextInput(attrs={
                 "class":"form-control"
             }),
         }

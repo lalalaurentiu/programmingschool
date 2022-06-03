@@ -35,8 +35,8 @@ class Lessons(models.Model):
 
 class Lesson(models.Model):
     category = models.ForeignKey(Lessons, null=True, on_delete=models.CASCADE, related_name="lesson")
-    title = models.CharField(max_length=200, blank=True, unique=True)
-    slug = models.SlugField(max_length=250, unique=True)
+    title = models.CharField(max_length=200, blank=True, null=True, unique=True)
+    slug = models.SlugField(max_length=250, unique=True, null=True, blank=True)
     content = models.TextField()
     code_python = models.TextField(blank=True)
     code_html = models.TextField(blank=True)
@@ -53,7 +53,8 @@ class Lesson(models.Model):
         return self.slug
 
     def save(self, *args, **kwargs):
-        self.slug = self.title.replace(" ", "_")
+        if self.title:
+            self.slug = self.title.replace(" ", "_")
         if self.code_python:
             self.code_link = self.category.slug
         super(Lesson,self).save(*args, **kwargs)
