@@ -122,7 +122,7 @@
   
                       <!-- Table body -->
                       <tbody>
-                          {% for lectii in category.lessons.all %}
+                          {% for lectii in category.lessons.all|dictsort:'id' %}
                             <tr>
                                 <td class="d-flex justify-content-between">
                                   <style>
@@ -217,7 +217,7 @@
                                 </td>
                                 <td>
                                   <div style="max-height:400px ;overflow-y:auto ;">
-                                    {% for exercitiu in lectii.exercise.all %}
+                                    {% for exercitiu in lectii.exercise.all|dictsort:'id' %}
                                     <div class="d-flex justify-content-between">
                                       <a href="{% url 'staff:editexercise' id=exercitiu.id %}">{{exercitiu.title}}</a> 
                                       <div class="d-flex">

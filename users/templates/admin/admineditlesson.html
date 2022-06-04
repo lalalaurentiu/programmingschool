@@ -52,7 +52,7 @@
     <div class="container-fluid border mt-2 bg-white">
         <div class="pt-5 ml-1">
             <div class="mt-5">
-                {% for lectie in lessons_content %}
+                {% for lectie in lessons_content|dictsort:'id' %}
                 
                     {% if lesson.id == lectie.id %}
                         {% if lectie.title == None and lectie.slug == None %}
