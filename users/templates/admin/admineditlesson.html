@@ -63,12 +63,12 @@
                         <div class="m-2 border">
                             Copy this snippet to show button code in page <br>
                             <code>
-                                &lt;a onclick="{{ lectie.slug }}();" style="color: blue;"&gt;
-                                Try code 
-                                &lt;svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="i bi-chevron-double-rightb" viewBox="0 0 16 16" &gt;
-                                &lt;path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/&gt;
-                                &lt;path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/&gt;
-                                &lt;/svg&gt;
+                                &lt;a onclick="{{ lectie.slug }}();" style="color: blue;"&gt; <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;Try code <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="i bi-chevron-double-rightb" viewBox="0 0 16 16" &gt; <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/&gt;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/&gt;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/svg&gt;<br>
                                 &lt;/a&gt;
                             </code>
                         </div>
@@ -156,11 +156,7 @@
         $(document).ready( function (){
           $("#title").html($("#id_title").val());
           $("#content").html($("#id_content").val());
-          $.each(code, function (){
-            if ($(this).val() !== ""){
-                $("#button").html(`<button type="button" class="btn btn-primary" onclick="activate()">Try code</button>`)
-            }
-          })
+          
           if ($("#id_video").val() !== ""){
               $("#id_video").html(`<video class="border w-100" src="${$("#id_video").val()}"></video>`);
           }

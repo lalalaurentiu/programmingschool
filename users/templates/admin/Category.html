@@ -141,12 +141,12 @@
                                 </td>
                                 <td>
                                   <div style="max-height:400px ;overflow-y:auto ;">
-                                    {% for lectie in lectii.lesson.all %}
+                                    {% for lectie in lectii.lesson.all|dictsort:'id' %}
                                         <div class="d-flex justify-content-between" >
                                           {% if lectie.title %}
                                             <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul  content <b>{{lectie}}</b></a> 
                                           {% else %}
-                                            <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul  content <b>{{lectie.id }}</b></a> 
+                                            <a class="mr-1" href="{% url 'staff:editlesson' id=lectie.id %}">ID numarul  content <b>{{lectie.slug }}</b></a> 
                                           {% endif %}
                                             <form action="{% url 'staff:deletelesson' id=lectie.id %}" method="post">
                                               {% csrf_token %}
