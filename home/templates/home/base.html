@@ -20,6 +20,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+        <style>
+            .row{
+                margin: 0;
+            }
+        </style>
     </head>
 
     <body class="landing-page">
@@ -92,8 +97,10 @@
                 </div>
             </div>
         </nav>            
-            
-        {% block content %}{% endblock %}
+            <div style="max-width: 100vw;">
+                {% block content %}{% endblock %}
+            </div>
+        
 
         {% include 'includes/footer.html' %}
         {% block scripts %}{% include 'includes/scripts.html' %}{% endblock %}
